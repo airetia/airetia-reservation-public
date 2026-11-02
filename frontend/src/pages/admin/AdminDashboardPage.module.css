@@ -1,0 +1,62 @@
+/* frontend/src/pages/admin/AdminDashboardPage.module.css */
+
+.page        { max-width: 1000px; margin: 0 auto; padding: 24px 16px 64px; }
+.title       { font-size: 1.4rem; font-weight: 700; color: var(--navy, #191970); margin: 0 0 24px; }
+.loading     { text-align: center; padding: 60px 20px; color: #888; }
+.error       { text-align: center; padding: 60px 20px; color: #c00; }
+.empty       { text-align: center; padding: 24px; color: #888; font-size: 0.9rem; }
+
+.section     { margin-bottom: 32px; }
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.sectionHeader h2 { font-size: 1.05rem; font-weight: 700; color: var(--navy, #191970); margin: 0; }
+
+.seeAll {
+  font-size: 0.85rem;
+  color: var(--navy, #191970);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.seeAll:hover { opacity: 0.7; }
+
+.reviewLink {
+  padding: 6px 14px;
+  background: var(--pink-primary, #ed53a3);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: opacity 0.15s;
+}
+.reviewLink:hover { opacity: 0.88; }
+
+/* ── テーブル ────────────────────────────────────────────────────────────── */
+
+.table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e8e8f0; box-shadow: 0 2px 8px rgba(25,25,112,0.04); }
+.table thead th { background: #f4f4fb; color: var(--navy, #191970); font-weight: 700; padding: 10px 14px; text-align: left; border-bottom: 2px solid #e0e0f0; white-space: nowrap; }
+.table tbody td { padding: 10px 14px; border-bottom: 1px solid #f0f0f8; color: var(--color-text, #3c3c3b); vertical-align: middle; }
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover { background: #f9f9fe; }
+
+/* ── クイックリンク ──────────────────────────────────────────────────────── */
+
+.quickLinks { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+
+.quickBtn {
+  padding: 9px 20px;
+  background: var(--navy, #191970);
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+.quickBtn:hover { opacity: 0.85; }

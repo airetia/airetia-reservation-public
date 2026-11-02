@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>airetia｜審査済みの先生と安心レッスン【Bパターン】</title>
+  <meta name="description" content="全員審査済みの先生だけ。お子様を安心して任せられるレッスンプラットフォーム。月額不要のチケット制。" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    :root{
+      --navy:#191970;--pink:#ed53a3;--pink-dark:#c21875;
+      --purple:#a364e2;--green:#10b981;--yellow:#FFD600;
+      --bg:#f8f5ff;--text:#1e1e2e;--muted:#5a5a72;--max-w:480px;
+    }
+    body{background:var(--bg);color:var(--text);font-family:"Hiragino Sans","Yu Gothic",sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--max-w);margin:0 auto;padding:0 20px}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+    .fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease-out,transform .6s ease-out}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+
+    /* HERO */
+    #hero{background:linear-gradient(150deg,#2d1b6e 0%,#4a1a7a 40%,#191970 100%);padding:56px 0 68px;text-align:center;position:relative;overflow:hidden}
+    #hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(163,100,226,.2) 0%,transparent 45%),radial-gradient(circle at 70% 80%,rgba(237,83,163,.15) 0%,transparent 45%);pointer-events:none}
+
+    .trust-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);border-radius:30px;padding:8px 20px;margin-bottom:24px;animation:fadeUp .6s ease-out both;backdrop-filter:blur(8px)}
+    .trust-badge .ck{display:flex;align-items:center;justify-content:center;width:22px;height:22px;background:var(--green);border-radius:50%;font-size:.75rem;flex-shrink:0}
+    .trust-badge span{font-size:.82rem;font-weight:700;color:#fff;letter-spacing:.04em}
+
+    .hero-title{font-size:2.05rem;font-weight:900;line-height:1.35;color:#fff;margin-bottom:16px;animation:fadeUp .65s .1s ease-out both}
+    .hero-title em{font-style:normal;background:linear-gradient(90deg,#e8a0ff,#ffb3d9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:.97rem;color:rgba(255,255,255,.75);line-height:1.9;margin-bottom:32px;animation:fadeUp .65s .2s ease-out both}
+
+    .check-flow{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:32px;animation:fadeUp .65s .3s ease-out both;flex-wrap:wrap}
+    .check-step{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:10px;padding:10px 12px;text-align:center;font-size:.72rem;color:rgba(255,255,255,.85);font-weight:700;min-width:72px}
+    .check-step .ico{font-size:1.1rem;display:block;margin-bottom:4px}
+    .check-arrow{color:rgba(255,255,255,.4);font-size:1rem}
+
+    .btn-cta{display:block;width:100%;max-width:340px;margin:0 auto;padding:18px 24px;background:linear-gradient(135deg,var(--pink) 0%,var(--pink-dark) 100%);color:#fff;font-size:1.05rem;font-weight:900;letter-spacing:.04em;text-decoration:none;text-align:center;border-radius:50px;box-shadow:0 6px 24px rgba(194,24,117,.35);transition:transform .2s,box-shadow .2s;animation:pulse 3s ease-in-out infinite}
+    .btn-cta:hover{transform:translateY(-2px) scale(1.02)}
+    .btn-cta small{display:block;font-size:.72rem;font-weight:500;opacity:.85;margin-top:3px}
+
+    .sec{padding:64px 0}
+    .sec--white{background:#fff}
+    .sec--dark{background:var(--navy);color:#fff}
+    .eyebrow{font-size:.75rem;font-weight:800;letter-spacing:.12em;color:var(--pink-dark);text-align:center;margin-bottom:10px}
+    .sec--dark .eyebrow{color:var(--pink)}
+    .sec-title{font-size:1.5rem;font-weight:900;color:var(--navy);text-align:center;line-height:1.4;margin-bottom:36px}
+    .sec--dark .sec-title{color:#fff}
+
+    /* 審査プロセス */
+    .audit-list{display:grid;gap:16px}
+    .audit-item{background:#fff;border-radius:16px;padding:22px 20px;position:relative;box-shadow:0 4px 20px rgba(25,25,112,.07);border:2px solid transparent}
+    .audit-item::before{content:"";position:absolute;inset:-2px;border-radius:18px;background:linear-gradient(135deg,var(--purple),var(--pink));z-index:-1}
+    .audit-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+    .audit-icon{font-size:1.8rem}
+    .audit-title{font-size:1.05rem;font-weight:900;color:var(--navy)}
+    .audit-desc{font-size:.88rem;color:var(--muted);line-height:1.8;padding-left:48px}
+    .audit-ok{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding-left:48px;font-size:.78rem;font-weight:700;color:var(--green)}
+
+    /* FEATURES */
+    .feat-list{display:grid;gap:20px}
+    .feat-card{background:var(--bg);border-radius:20px;padding:28px 24px;border:1.5px solid rgba(237,83,163,.2);position:relative;overflow:hidden}
+    .feat-card::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--pink),var(--purple));border-radius:4px 0 0 4px}
+    .feat-num{font-size:.7rem;font-weight:800;letter-spacing:.1em;color:var(--pink-dark);margin-bottom:8px}
+    .feat-icon{font-size:2.2rem;margin-bottom:10px;display:block}
+    .feat-title{font-size:1.1rem;font-weight:900;color:var(--navy);margin-bottom:8px}
+    .feat-desc{font-size:.9rem;color:var(--muted);line-height:1.8}
+    .feat-tag{display:inline-block;margin-top:12px;background:linear-gradient(135deg,var(--pink),var(--pink-dark));color:#fff;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px}
+
+    /* STEPS */
+    .steps{display:grid;gap:0;position:relative}
+    .steps::before{content:"";position:absolute;left:28px;top:28px;bottom:28px;width:2px;background:linear-gradient(180deg,var(--pink) 0%,var(--purple) 100%)}
+    .step-item{display:flex;gap:20px;align-items:flex-start;padding:20px 0}
+    .step-circle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--pink-dark));display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 4px 16px rgba(237,83,163,.4);position:relative;z-index:1}
+    .step-body{padding-top:8px}
+    .step-title{font-size:1rem;font-weight:800;margin-bottom:4px;color:#fff}
+    .step-desc{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.7}
+
+    /* TESTI */
+    .testi-list{display:grid;gap:16px}
+    .testi-card{background:#fff;border-radius:20px;padding:24px 20px;box-shadow:0 4px 20px rgba(25,25,112,.07);border:1.5px solid rgba(163,100,226,.2)}
+    .stars{color:var(--yellow);font-size:1rem;margin-bottom:10px;letter-spacing:2px}
+    .comment{font-size:.92rem;line-height:1.85;margin-bottom:16px;padding-left:12px;border-left:3px solid var(--purple)}
+    .author{font-size:.82rem;font-weight:700;color:var(--muted)}
+
+    #finalcta{padding:72px 0;background:linear-gradient(160deg,#2d1b6e 0%,var(--navy) 100%);text-align:center;position:relative;overflow:hidden}
+    #finalcta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(237,83,163,.2) 0%,transparent 50%),radial-gradient(circle at 80% 50%,rgba(163,100,226,.15) 0%,transparent 50%);pointer-events:none}
+    .fc-title{font-size:1.7rem;font-weight:900;color:#fff;line-height:1.4;margin-bottom:12px}
+    .fc-title em{font-style:normal;background:linear-gradient(90deg,#e8a0ff,#ffb3d9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .fc-sub{font-size:.92rem;color:rgba(255,255,255,.7);margin-bottom:36px;line-height:1.8}
+    .badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+    .badge{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:6px 14px;font-size:.78rem;color:rgba(255,255,255,.85);font-weight:600}
+
+    footer{background:#080820;padding:24px 20px;text-align:center}
+    .f-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:14px}
+    .f-links a{font-size:.75rem;color:rgba(255,255,255,.4);text-decoration:none}
+    .f-links a:hover{color:var(--pink)}
+    .f-copy{font-size:.7rem;color:rgba(255,255,255,.2)}
+
+    #sticky{position:fixed;bottom:0;left:0;right:0;padding:12px 20px;background:rgba(248,245,255,.96);backdrop-filter:blur(10px);border-top:1.5px solid rgba(237,83,163,.3);z-index:100;transform:translateY(100%);transition:transform .35s ease}
+    #sticky.show{transform:translateY(0)}
+    #sticky .btn-cta{padding:15px 24px;font-size:.98rem;animation:none}
+
+    @media(min-width:640px){:root{--max-w:560px}.hero-title{font-size:2.4rem}}
+    @media(min-width:1024px){:root{--max-w:640px}}
+  </style>
+</head>
+<body>
+
+<section id="hero">
+  <div class="wrap">
+    <div class="trust-badge">
+      <span class="ck">✓</span>
+      <span>全先生・講師が審査完了済み</span>
+    </div>
+    <h1 class="hero-title">子どもを任せられる<br><em>安心の先生</em>と、<br>つながれる場所。</h1>
+    <p class="hero-sub">身分証・契約書・口座情報の提出と<br>管理者審査を通過した先生だけが活動できます。<br>月額不要・チケット制で気軽に始められます。</p>
+    <div class="check-flow">
+      <div class="check-step"><span class="ico">🪪</span>身分証審査</div>
+      <span class="check-arrow">→</span>
+      <div class="check-step"><span class="ico">📄</span>契約書確認</div>
+      <span class="check-arrow">→</span>
+      <div class="check-step"><span class="ico">✅</span>管理者承認</div>
+    </div>
+    <div style="animation:fadeUp .65s .4s ease-out both">
+      <a href="/register" class="btn-cta">無料で会員登録する<small>登録30秒・クレジットカード不要</small></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--white">
+  <div class="wrap">
+    <p class="eyebrow">Security</p>
+    <h2 class="sec-title">airetiaの<br>3段階審査プロセス</h2>
+    <div class="audit-list">
+      <div class="audit-item fade-up">
+        <div class="audit-header"><span class="audit-icon">🪪</span><h3 class="audit-title">身分証明書の提出と確認</h3></div>
+        <p class="audit-desc">運転免許証・マイナンバーカードなどの身分証を提出。実在する人物であることを確認します。</p>
+        <span class="audit-ok">✓ 本人確認済み</span>
+      </div>
+      <div class="audit-item fade-up">
+        <div class="audit-header"><span class="audit-icon">📄</span><h3 class="audit-title">署名済み契約書の締結</h3></div>
+        <p class="audit-desc">airetiaとの業務委託契約を締結。利用規約・子どもへの接し方のガイドラインに同意した方のみ活動できます。</p>
+        <span class="audit-ok">✓ 契約締結済み</span>
+      </div>
+      <div class="audit-item fade-up">
+        <div class="audit-header"><span class="audit-icon">👤</span><h3 class="audit-title">管理者による最終承認</h3></div>
+        <p class="audit-desc">書類を管理者がひとりひとり確認し、承認した先生だけが活動を開始できます。審査期間は3営業日以内。</p>
+        <span class="audit-ok">✓ 管理者承認済み</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Features</p>
+    <h2 class="sec-title">安心だけじゃない<br>airetiaの3つの強み</h2>
+    <div class="feat-list">
+      <div class="feat-card fade-up">
+        <p class="feat-num">POINT 01</p><span class="feat-icon">🎫</span>
+        <h3 class="feat-title">月額不要のチケット制</h3>
+        <p class="feat-desc">チケット1枚500円（税抜）。使いたい分だけ購入するから休んだ月の「もったいない」がゼロ。子どものペースに合わせて無理なく続けられます。</p>
+        <span class="feat-tag">有効期限1年間</span>
+      </div>
+      <div class="feat-card fade-up">
+        <p class="feat-num">POINT 02</p><span class="feat-icon">📱</span>
+        <h3 class="feat-title">予約・キャンセルがアプリで簡単</h3>
+        <p class="feat-desc">空き枠を見てタップするだけで予約完了。キャンセルも24時間前なら100%チケット返還。急な予定変更にも対応できます。</p>
+        <span class="feat-tag">24時間前100%返還</span>
+      </div>
+      <div class="feat-card fade-up">
+        <p class="feat-num">POINT 03</p><span class="feat-icon">👨‍👩‍👧</span>
+        <h3 class="feat-title">兄弟まとめて1アカウントで管理</h3>
+        <p class="feat-desc">お子様を最大5名まで登録可能。チケットは家族で共有できるので、複数の子どもを持つ保護者の方にも最適です。</p>
+        <span class="feat-tag">最大5名登録</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--dark">
+  <div class="wrap">
+    <p class="eyebrow">How it Works</p>
+    <h2 class="sec-title">使い方はかんたん4ステップ</h2>
+    <div class="steps">
+      <div class="step-item fade-up"><div class="step-circle">1</div><div class="step-body"><h3 class="step-title">無料会員登録（30秒）</h3><p class="step-desc">メールアドレスとパスワードだけ。クレジットカードは不要です。</p></div></div>
+      <div class="step-item fade-up"><div class="step-circle">2</div><div class="step-body"><h3 class="step-title">お子様を登録</h3><p class="step-desc">名前・年齢などを入力。兄弟もまとめて登録できます。</p></div></div>
+      <div class="step-item fade-up"><div class="step-circle">3</div><div class="step-body"><h3 class="step-title">チケットを購入</h3><p class="step-desc">振込確認後にチケットが付与されます。まずは少枚数から。</p></div></div>
+      <div class="step-item fade-up"><div class="step-circle">4</div><div class="step-body"><h3 class="step-title">審査済みの先生を選んで予約</h3><p class="step-desc">好きな先生・日時を選んで予約。チケットが自動消費されます。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Voice</p>
+    <h2 class="sec-title">保護者の方からの声</h2>
+    <div class="testi-list">
+      <div class="testi-card fade-up"><p class="stars">★★★★★</p><p class="comment">「先生の審査がしっかりしているので安心して子どもを任せられます。予約もキャンセルもアプリから簡単にできて便利です。」</p><p class="author">Y.H さん ／ 小学6年生の保護者</p></div>
+      <div class="testi-card fade-up"><p class="stars">★★★★★</p><p class="comment">「初めてオンラインレッスンを試しましたが、先生が契約書を締結済みと聞いて安心しました。子どもも楽しそうで続けています。」</p><p class="author">K.S さん ／ 小学2年生の保護者</p></div>
+      <div class="testi-card fade-up"><p class="stars">★★★★☆</p><p class="comment">「月謝制ではないのでプレッシャーなく始められました。子どもが興味を持った時だけ予約できるのが気に入っています。」</p><p class="author">T.M さん ／ 小学3年生の保護者</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="finalcta">
+  <div class="wrap">
+    <h2 class="fc-title fade-up">審査済みの先生と、<br><em>安心のレッスン</em>を今日から。</h2>
+    <p class="fc-sub fade-up">登録無料・30秒で完了<br>クレジットカード登録不要</p>
+    <div class="badges fade-up">
+      <span class="badge">✅ 全員審査済み</span>
+      <span class="badge">🔒 SSL暗号化通信</span>
+      <span class="badge">🎫 月額不要</span>
+    </div>
+    <a href="/register" class="btn-cta fade-up">無料で会員登録する<small>登録30秒・クレジットカード不要</small></a>
+  </div>
+</section>
+
+<footer>
+  <div class="f-links">
+    <a href="/privacy">プライバシーポリシー</a><a href="/termsOfService">利用規約</a>
+    <a href="/legal-notice">特定商取引法</a><a href="/contact">お問い合わせ</a><a href="/">公式サイトへ</a>
+  </div>
+  <p class="f-copy">© 2026 airetia. All rights reserved.</p>
+</footer>
+
+<div id="sticky">
+  <a href="/register" class="btn-cta">無料で会員登録する<small>登録30秒・クレジットカード不要</small></a>
+</div>
+
+<script>
+  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)} }), {threshold:.12});
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  const sticky = document.getElementById('sticky');
+  new IntersectionObserver(es => es.forEach(e => sticky.classList.toggle('show',!e.isIntersecting)),{threshold:0}).observe(document.getElementById('hero'));
+</script>
+</body>
+</html>

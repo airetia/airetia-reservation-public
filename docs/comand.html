@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1920px; height: 1080px;
+    background: linear-gradient(135deg, #0d1117 0%, #0a0f1e 100%);
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    color: #e6edf3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 28px;
+    padding: 48px 56px;
+    overflow: hidden;
+  }
+  .header { grid-column: 1/-1; border-bottom: 1px solid #21314a; padding-bottom: 24px; display: flex; align-items: baseline; gap: 20px; }
+  .header h1 { font-size: 30px; color: #58a6ff; letter-spacing: .03em; }
+  .header p { font-size: 14px; color: #4a6080; }
+  .card { background: rgba(22,27,34,0.85); border: 1px solid #21314a; border-radius: 14px; padding: 28px 32px; display: flex; flex-direction: column; gap: 12px; backdrop-filter: blur(4px); }
+  .card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: #4a6080; margin-bottom: 4px; }
+  .flow-row { display: flex; align-items: center; gap: 12px; background: #070b11; border-radius: 8px; padding: 11px 16px; border: 1px solid #1a2535; }
+  .num { background: #1a4a8a; color: #79c0ff; font-weight: 800; font-size: 12px; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid #2a6abf; }
+  .cmd { font-family: 'Cascadia Code', Consolas, monospace; font-size: 15px; color: #79c0ff; min-width: 210px; }
+  .note { font-size: 13px; color: #506070; }
+  .cmd-row { display: flex; gap: 16px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid #131a24; }
+  .cmd-row:last-child { border: none; }
+  .cmd-box { background: #070b11; border: 1px solid #1a2535; border-radius: 6px; padding: 7px 13px; font-family: 'Cascadia Code', Consolas, monospace; font-size: 14px; color: #79c0ff; white-space: nowrap; flex-shrink: 0; }
+  .desc { font-size: 13px; color: #506070; padding-top: 8px; line-height: 1.55; }
+  .rule-row { display: flex; gap: 12px; align-items: flex-start; padding: 9px 0; border-bottom: 1px solid #131a24; }
+  .rule-row:last-child { border: none; }
+  .badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 5px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+  .ok { background: #0e2d1a; color: #3fb950; border: 1px solid #1a5a30; }
+  .ng { background: #2d0e0e; color: #f85149; border: 1px solid #5a1a1a; }
+  .rule-text { font-size: 13px; color: #8b9ab0; line-height: 1.6; }
+  code { font-family: Consolas, monospace; background: #070b11; border: 1px solid #1a2535; padding: 1px 6px; border-radius: 3px; font-size: 12px; color: #79c0ff; }
+  strong.g { color: #3fb950; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⬡ Git チートシート</h1>
+  <p>1人開発・2台PC運用　／　Windows（外） ↔ Mac（家）</p>
+</div>
+
+<div class="card">
+  <div class="card-title">毎日の作業フロー</div>
+  <div class="flow-row"><div class="num">1</div><div class="cmd">git pull</div><div class="note">作業開始前に必ず。最新状態にする</div></div>
+  <div class="flow-row"><div class="num">2</div><div class="cmd">（作業）</div><div class="note">コードを書く・修正する</div></div>
+  <div class="flow-row"><div class="num">3</div><div class="cmd">git add .</div><div class="note">変更ファイルをすべて対象にする</div></div>
+  <div class="flow-row"><div class="num">4</div><div class="cmd">git commit -m "メモ"</div><div class="note">何をしたか一言で残す</div></div>
+  <div class="flow-row"><div class="num">5</div><div class="cmd">git push</div><div class="note">GitHubに反映。作業終了のたびに</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">確認・修正コマンド</div>
+  <div class="cmd-row"><div class="cmd-box">git status</div><div class="desc">現在の変更状態を確認<br>迷ったらまずこれ</div></div>
+  <div class="cmd-row"><div class="cmd-box">git log --oneline</div><div class="desc">commitの履歴を一覧表示</div></div>
+  <div class="cmd-row"><div class="cmd-box">git reset HEAD~1</div><div class="desc">直前のcommitを取り消す<br>push前のみ有効</div></div>
+  <div class="cmd-row"><div class="cmd-box">git remote set-url origin &lt;URL&gt;</div><div class="desc">リポジトリ名変更後に<br>接続先URLを更新</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">ルールと注意</div>
+  <div class="rule-row"><span class="badge ok">必須</span><div class="rule-text">作業開始は必ず <code>git pull</code> から</div></div>
+  <div class="rule-row"><span class="badge ok">推奨</span><div class="rule-text">commitメッセージは内容がわかる言葉で<br><code>"修正"</code> より <code>"ログイン機能追加"</code></div></div>
+  <div class="rule-row"><span class="badge ok">初回</span><div class="rule-text">プロジェクトに <code>.gitignore</code> を置く<br><code>bin/</code> <code>.classpath</code> <code>.DS_Store</code> を除外</div></div>
+  <div class="rule-row"><span class="badge ng">NG</span><div class="rule-text">リポジトリを <strong class="g">Public</strong> にしない → コードが全公開される</div></div>
+  <div class="rule-row"><span class="badge ng">NG</span><div class="rule-text">長期間 <code>push</code> しない → ローカルとGitHubが乖離する</div></div>
+  <div class="rule-row"><span class="badge ng">今不要</span><div class="rule-text">branch / merge / pull request は今のフェーズでは不要</div></div>
+</div>
+
+</body>
+</html>

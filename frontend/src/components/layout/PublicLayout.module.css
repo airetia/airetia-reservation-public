@@ -1,0 +1,6 @@
+/* frontend/src/components/layout/PublicLayout.module.css */
+
+.layout {
+  min-height: 100vh;
+  background-color: var(--color-bg-subtle);
+}

@@ -1,0 +1,75 @@
+/* frontend/src/pages/admin/AdminInquiriesPage.module.css */
+
+.page    { max-width: 1000px; margin: 0 auto; padding: 24px 16px 64px; }
+.title   { font-size: 1.4rem; font-weight: 700; color: var(--navy, #191970); margin: 0 0 20px; }
+.loading { text-align: center; padding: 60px 20px; color: #888; }
+.error   { text-align: center; padding: 40px 20px; color: #c00; }
+.empty   { text-align: center; padding: 40px 20px; color: #888; }
+
+/* ── フィルター ──────────────────────────────────────────────────────────── */
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.filterBtn { padding: 5px 14px; border: 1px solid #d0d0ee; border-radius: 20px; font-size: 0.82rem; color: #666; background: #f4f4fb; cursor: pointer; transition: background 0.13s; }
+.filterBtn:hover { background: #e8e8f8; }
+.active { background: var(--navy, #191970) !important; color: #fff !important; border-color: var(--navy, #191970) !important; font-weight: 700; }
+
+/* ── テーブル ────────────────────────────────────────────────────────────── */
+
+.table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e8e8f0; box-shadow: 0 2px 8px rgba(25,25,112,0.04); }
+.table thead th { background: #f4f4fb; color: var(--navy, #191970); font-weight: 700; padding: 10px 14px; text-align: left; border-bottom: 2px solid #e0e0f0; white-space: nowrap; }
+.table tbody td { padding: 10px 14px; border-bottom: 1px solid #f0f0f8; color: var(--color-text, #3c3c3b); vertical-align: middle; }
+.table tbody tr:last-child td { border-bottom: none; }
+.table tbody tr:hover { background: #f9f9fe; }
+.bodyCell { max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.badge { display: inline-block; padding: 3px 9px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; }
+
+/* ══ オーバーレイ & モーダル ══ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 620px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+  padding: 24px;
+}
+
+.modalTitle { font-size: 1.05rem; font-weight: 700; color: var(--navy, #191970); margin: 0 0 16px; }
+
+/* 詳細行 */
+.label { font-size: 0.8rem; font-weight: 700; color: #888; }
+.value { font-size: 0.9rem; color: var(--color-text, #3c3c3b); margin-bottom: 12px; white-space: pre-wrap; }
+
+/* ステータス変更 */
+.statusRow { display: flex; align-items: center; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid #f0f0f8; flex-wrap: wrap; }
+.statusSelect { padding: 7px 12px; border: 1px solid #d0d0ee; border-radius: 8px; font-size: 0.88rem; outline: none; }
+.updateBtn { padding: 7px 18px; background: var(--navy, #191970); color: #fff; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+.updateBtn:hover { opacity: 0.85; }
+.closeBtn { margin-left: auto; padding: 7px 16px; background: #f4f4fb; color: #666; border: 1px solid #d0d0ee; border-radius: 8px; font-size: 0.85rem; cursor: pointer; }
+.closeBtn:hover { background: #e8e8f8; }
+
+/* 添付ファイル */
+.attachments { display: flex; flex-direction: column; gap: 4px; }
+.attachLink { font-size: 0.82rem; color: var(--navy, #191970); text-decoration: underline; }
+
+/* フォームフィールド（内部） */
+.field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+.field label { font-size: 0.83rem; font-weight: 600; color: var(--navy, #191970); }
+.field input,
+.field textarea { padding: 8px 11px; border: 1px solid #d0d0ee; border-radius: 8px; font-size: 0.9rem; outline: none; font-family: inherit; }
+.field input:focus,
+.field textarea:focus { border-color: var(--navy, #191970); }

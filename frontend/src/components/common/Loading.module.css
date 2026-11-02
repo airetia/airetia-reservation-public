@@ -1,0 +1,26 @@
+/* frontend/src/components/common/Loading.module.css */
+
+.spinner {
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+.sm  { width: 1rem;  height: 1rem; }
+.md  { width: 2rem;  height: 2rem; border-width: 3px; }
+.lg  { width: 3rem;  height: 3rem; border-width: 4px; }
+
+/* フルスクリーンオーバーレイ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

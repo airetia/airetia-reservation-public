@@ -1,0 +1,222 @@
+/* frontend/src/pages/provider/ProviderDashboardPage.module.css */
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.loading {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--color-text-muted);
+}
+.error {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: color-mix(in srgb, var(--color-danger) 8%, white);
+  color: var(--color-danger);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 25%, white);
+  border-radius: var(--border-radius-lg);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-md);
+}
+.empty {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.section { margin-bottom: var(--spacing-xl); }
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+.sectionHeader h2 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+.seeAll {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+}
+.seeAll:hover { text-decoration: underline; }
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xl);
+}
+.alert {
+  background: color-mix(in srgb, var(--color-warning) 10%, white);
+  border: 1px solid color-mix(in srgb, var(--color-warning) 35%, white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  color: var(--color-warning-text);
+  margin-bottom: var(--spacing-xl);
+  line-height: var(--line-height-loose);
+}
+.bookingList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+.bookingCard {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast);
+}
+.bookingCard:hover { box-shadow: var(--shadow-md); }
+.service {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-xs);
+}
+.bookingMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.datetime {}
+.participant {}
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: .15rem .5rem;
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  background: color-mix(in srgb,var(--color-primary) 12%,white);
+  color: var(--color-primary-dark);
+}
+.pending {
+  background: color-mix(in srgb, var(--color-warning) 12%, white);
+  color: var(--color-warning-text);
+}
+.reportLink {
+  display: inline-block;
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+}
+.reportLink:hover { text-decoration: underline; }
+.quickLinks {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-md);
+}
+.quickBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  padding: .5rem 1.125rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  color: var(--color-text);
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: pointer;
+}
+.quickBtn:hover { background: var(--color-bg-muted); box-shadow: var(--shadow-sm); }
+
+/* ── 報酬カード ─────────────────────────────────────────────────── */
+.rewardCard {
+  background: linear-gradient(135deg, var(--color-primary, var(--color-primary)) 0%, var(--color-primary-dark, var(--color-primary-dark)) 100%);
+  color: #fff;
+  border-radius: 1rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.rewardMain { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.rewardLabel { font-size: .9rem; opacity: .9; }
+.rewardAmount { font-size: 2rem; font-weight: 700; }
+.rewardSub { font-size: .85rem; opacity: .85; margin-top: .5rem; display: flex; gap: 1rem; }
+.rewardNote { opacity: .7; }
+/* ── 警告セクション ─────────────────────────────────────────────── */
+.alertSection {
+  border: 2px solid var(--color-danger, var(--color-danger));
+  border-radius: .75rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.alertTitle { color: var(--color-danger, var(--color-danger)); margin: 0 0 .75rem; }
+.bookingCardAlert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .75rem;
+  background: var(--color-surface, var(--color-bg-subtle));
+  border-radius: .5rem;
+  margin-bottom: .5rem;
+}
+.reportLink {
+  color: var(--color-primary, var(--color-primary));
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.moreLink {
+  color: var(--color-primary, var(--color-primary));
+  font-size: .9rem;
+  display: block;
+  margin-top: .5rem;
+  text-decoration: none;
+}
+/* ── サービスグリッド ────────────────────────────────────────────── */
+.sectionHeader { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.manageBtn {
+  color: var(--color-primary, var(--color-primary));
+  text-decoration: none;
+  font-size: .9rem;
+}
+.offeringEmpty { text-align: center; padding: 1.5rem; color: var(--color-text-muted, var(--color-text-muted)); }
+.addServiceLink {
+  display: inline-block;
+  margin-top: .5rem;
+  color: var(--color-primary, var(--color-primary));
+  font-weight: 600;
+  text-decoration: none;
+}
+.offeringGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.offeringCard {
+  border: 1px solid var(--color-border, var(--color-border));
+  border-radius: .75rem;
+  padding: 1rem;
+  background: var(--color-surface, var(--color-bg-subtle));
+}
+.offeringCard strong { display: block; margin-bottom: .4rem; }
+.offeringCard p { font-size: .875rem; color: var(--color-text-muted, var(--color-text-muted)); margin: .2rem 0; }
+/* ── クイックリンク ─────────────────────────────────────────────── */
+.quickLinks { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 2rem; }
+.quickBtn {
+  display: inline-block;
+  padding: .6rem 1.25rem;
+  background: var(--color-primary, var(--color-primary));
+  color: #fff;
+  border-radius: .5rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .9rem;
+}
+.quickBtnSecondary {
+  composes: quickBtn;
+  background: var(--color-surface, var(--color-bg-subtle));
+  color: var(--color-text, var(--color-text));
+  border: 1px solid var(--color-border, var(--color-border));
+}

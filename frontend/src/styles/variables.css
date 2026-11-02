@@ -1,0 +1,116 @@
+/* frontend/src/styles/variables.css */
+
+/**
+ * airetia デザイントークン
+ *
+ * ★ Single Source of Truth: web/common.css（LP共通スタイル）の :root に準拠
+ *   フロントエンドとLPのカラーは完全統一する。
+ *   ここに記載した値は lp/src/styles/common.css の --brand-* と同一であること。
+ *
+ * LP変数名 → フロントエンド変数名 マッピング:
+ *   --brand-main      → --color-primary       #ed53a3
+ *   --brand-main-line → --color-primary-dark   #c21875
+ *   --bg-brand        → --color-primary-light  #fff5fb
+ *   --brand-sub       → --color-secondary      #38b6ff
+ *   --brand-structure → --color-structure      #191970  (見出し・ナビ)
+ *   --brand-accent    → --color-accent         #a364e2
+ *   --brand-error     → --color-danger         #b00020
+ *   --brand-warning   → --color-warning        #FFD600
+ *   --text-main       → --color-text           #3C3C3B
+ *   --text-sub        → --color-text-muted     #4a4a48
+ *   --bg-page         → --color-bg-subtle      #f8f5ff
+ *   --bg-card         → --color-bg             #ffffff
+ *   --shadow-card     → --shadow-sm
+ *   --shadow-cta      → --shadow-cta
+ */
+:root {
+  /* ── ブランドカラー ─────────────────── */
+  --color-primary:        #ed53a3;                    /* brand-main */
+  --color-primary-dark:   #c21875;                    /* brand-main-line */
+  --color-primary-light:  #fff5fb;                    /* bg-brand */
+  --color-primary-alpha:  rgba(237, 83, 163, 0.12);
+
+  --color-secondary:      #38b6ff;                    /* brand-sub */
+  --color-secondary-dark: #1e96e0;
+  --color-secondary-light:#e0f4ff;
+
+  --color-structure:      #191970;                    /* brand-structure（見出し・ナビ） */
+  --color-accent:         #a364e2;                    /* brand-accent */
+
+  /* ── セマンティックカラー ────────────── */
+  --color-success:        #10b981;
+  --color-success-bg:     #d1fae5;                    /* success light bg */
+  --color-warning:        #FFD600;                    /* brand-warning */
+  --color-warning-bg:     #fffde0;
+  --color-warning-text:   #222222;                    /* 警告背景上テキスト（白文字禁止） */
+  --color-success-text:   #065f46;                    /* success dark text */
+  --color-danger:         #b00020;                    /* brand-error */
+  --color-danger-dark:    #8b0000;
+  --color-danger-bg:      #fce4ec;
+  --color-info:           #38b6ff;                    /* brand-sub と同値 */
+  --color-info-bg:        #e0f4ff;
+
+  /* ── テキスト ─────────────────────── */
+  --color-text:           #3C3C3B;                    /* text-main */
+  --color-text-muted:     #4a4a48;                    /* text-sub */
+  --color-text-light:     var(--color-text-light);
+
+  /* ── 背景 ──────────────────────────── */
+  --color-bg:             #ffffff;                    /* bg-card */
+  --color-bg-subtle:      #f8f5ff;                    /* bg-page（薄パープル） */
+  --color-bg-muted:       #fff5fb;                    /* bg-brand（薄ピンク） */
+
+  /* ── ボーダー ──────────────────────── */
+  --color-border:         rgba(237, 83, 163, 0.30);   /* 薄ピンク枠（一般用） */
+  --color-border-dark:    rgba(194, 24, 117, 0.55);
+  --color-border-brand:   #ed53a3;                    /* カード・インプット用ピンク枠 */
+
+  /* ── タイポグラフィ ─────────────────── */
+  --font-family:      '"Yu Gothic"', '"YuGothic"', '"Hiragino Sans"', 'sans-serif';
+  --font-size-xs:     0.75rem;    /* 12px */
+  --font-size-sm:     0.875rem;   /* 14px */
+  --font-size-base:   1rem;       /* 16px */
+  --font-size-lg:     1.125rem;   /* 18px */
+  --font-size-xl:     1.25rem;    /* 20px */
+  --font-size-2xl:    1.5rem;     /* 24px */
+  --font-size-3xl:    1.875rem;   /* 30px */
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+  --font-weight-black:    900;
+  --line-height-tight: 1.25;
+  --line-height-base:  1.8;       /* LP と統一 */
+  --line-height-loose: 2.0;
+
+  /* ── スペーシング ─────────────────── */
+  --spacing-xs:   0.25rem;
+  --spacing-sm:   0.5rem;
+  --spacing-md:   1rem;
+  --spacing-lg:   1.5rem;
+  --spacing-xl:   2rem;
+  --spacing-2xl:  3rem;
+
+  /* ── 角丸（LP トークンと対応）───────── */
+  --border-radius-sm:    0.5rem;    /*  8px */
+  --border-radius-md:    0.75rem;   /* 12px = radius-input */
+  --border-radius-lg:    1rem;      /* 16px */
+  --border-radius-xl:    1.25rem;   /* 20px = LP --radius */
+  --border-radius-full:  9999px;    /* ボタン用 = LP --radius-btn */
+
+  /* ── シャドウ（LP トークンと対応）────── */
+  --shadow-sm:   0 4px 12px rgba(25, 25, 112, 0.08);   /* shadow-card */
+  --shadow-md:   0 6px 20px rgba(25, 25, 112, 0.12);
+  --shadow-lg:   0 10px 28px rgba(25, 25, 112, 0.16);
+  --shadow-cta:  0 6px 20px rgba(237, 83, 163, 0.26);   /* CTA ボタン用 */
+  --shadow-sub:  0 6px 20px rgba(56, 182, 255, 0.26);   /* サブボタン用 */
+
+  /* ── レイアウト ───────────────────── */
+  --header-height:    60px;
+  --container-max-w:  1200px;
+
+  /* ── トランジション ─────────────────── */
+  --transition-fast:  150ms ease;
+  --transition-base:  250ms ease;
+  --transition-slow:  300ms ease;
+}

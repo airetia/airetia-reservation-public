@@ -1,0 +1,45 @@
+/* frontend/src/pages/error/NotFoundPage.module.css */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--spacing-xl);
+  gap: var(--spacing-md);
+}
+
+.code {
+  font-size: 6rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-border-dark);
+  line-height: 1;
+}
+
+.message {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.sub {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  max-width: 400px;
+}
+
+.btn {
+  padding: 0.625rem 1.5rem;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  margin-top: var(--spacing-sm);
+  transition: background-color var(--transition-fast);
+}
+.btn:hover { background-color: var(--color-primary-dark); }

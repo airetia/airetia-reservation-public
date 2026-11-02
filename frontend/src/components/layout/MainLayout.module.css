@@ -1,0 +1,16 @@
+/* frontend/src/components/layout/MainLayout.module.css */
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-subtle);
+}
+
+.main { flex: 1; }
+
+.container {
+  max-width: var(--container-max-w);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-xl);
+}

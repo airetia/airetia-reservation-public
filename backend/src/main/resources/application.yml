@@ -1,0 +1,103 @@
+# backend/src/main/resources/application.yml
+spring:
+  application:
+    name: airetia-backend
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/airetia?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        # dialect は Hibernate が MySQL JDBC ドライバから自動検出するため指定不要
+        format_sql: true
+        use_sql_comments: true
+    show-sql: false
+    open-in-view: false
+
+  jackson:
+    # フロントエンドの全モデルは camelCase（firstName, startDatetime 等）で定義。
+    # バックエンド DTO も Java camelCase フィールドのため変換不要。
+    default-property-inclusion: NON_NULL
+
+  session:
+    store-type: none
+    timeout: 30m
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 35MB
+
+  mail:
+    host: localhost
+    port: 1025
+    username: ""
+    password: ""
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+  thymeleaf:
+    check-template-location: false
+
+# ─────────────────────────────────────────────────
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    session:
+      timeout: 30m
+      cookie:
+        name: airetia_SESSION
+        http-only: true
+        secure: false
+        same-site: lax
+        max-age: 28800
+
+logging:
+  level:
+    root: INFO
+    com.airetia: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+airetia:
+  security:
+    allowed-origins:
+      - http://localhost:5173
+      - http://localhost:3000
+  cors:
+    max-age: 3600
+
+# AWS S3
+# Phase1: ローカル開発時はモック動作（S3Client は空 bucket 設定で起動）
+# Phase2/本番: 実際の bucket 名・region を設定する
+aws:
+  s3:
+    bucket: ${AWS_S3_BUCKET:airetia-documents-dev}
+  region: ${AWS_REGION:ap-northeast-1}

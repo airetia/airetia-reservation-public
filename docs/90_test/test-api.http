@@ -1,0 +1,459 @@
+###############################################################################
+# airetia 全般API テストファイル
+# 
+# 使い方:
+# 1. VSCode拡張機能「REST Client」をインストール
+# 2. 各リクエストの上にある「Send Request」をクリック
+# 3. レスポンスが右側に表示される
+#
+# 前提:
+# - 認証が必要なエンドポイントは、先に auth.http でログインすること
+# - セッションCookieが自動的に引き継がれる
+###############################################################################
+
+@baseUrl = http://localhost:8080
+@apiVersion = v1
+
+###############################################################################
+# 1. システムヘルスチェック
+###############################################################################
+
+### 1-1. Hello World
+GET {{baseUrl}}/api/hello
+Accept: application/json
+
+### 1-2. バージョン情報（Phase 2以降）
+# GET {{baseUrl}}/api/{{apiVersion}}/system/version
+# Accept: application/json
+
+
+###############################################################################
+# 2. メンバー管理
+###############################################################################
+
+### 2-1. 自分のプロフィール取得
+# 注意: 先に auth.http でログインすること
+GET {{baseUrl}}/api/{{apiVersion}}/members/me
+Accept: application/json
+
+### 2-2. メンバー詳細取得（ID指定）
+# 注意: {memberId} を実際のIDに置き換えること
+GET {{baseUrl}}/api/{{apiVersion}}/members/1
+Accept: application/json
+
+### 2-3. メンバー情報更新
+PATCH {{baseUrl}}/api/{{apiVersion}}/members/1
+Content-Type: application/json
+
+{
+  "firstName": "太郎",
+  "lastName": "山田",
+  "firstNameKana": "たろう",
+  "lastNameKana": "やまだ",
+  "postalCode": "1500002",
+  "address": "東京都渋谷区渋谷1-2-3",
+  "phoneNumber": "09087654321"
+}
+
+### 2-4. メンバー削除（論理削除）
+# DELETE {{baseUrl}}/api/{{apiVersion}}/members/1
+
+
+###############################################################################
+# 3. Participant（利用者・子どもプロフィール）管理
+###############################################################################
+
+### 3-1. 子どもプロフィール一覧取得
+GET {{baseUrl}}/api/{{apiVersion}}/participants
+Accept: application/json
+
+### 3-2. 子どもプロフィール登録
+POST {{baseUrl}}/api/{{apiVersion}}/participants
+Content-Type: application/json
+
+{
+  "participantType": "CHILD",
+  "firstName": "一郎",
+  "lastName": "山田",
+  "firstNameKana": "いちろう",
+  "lastNameKana": "やまだ",
+  "birthDate": "2015-04-10",
+  "gender": "MALE",
+  "notes": "ピアノに興味あり"
+}
+
+### 3-3. 子どもプロフィール詳細取得
+GET {{baseUrl}}/api/{{apiVersion}}/participants/1
+Accept: application/json
+
+### 3-4. 子どもプロフィール更新
+PATCH {{baseUrl}}/api/{{apiVersion}}/participants/1
+Content-Type: application/json
+
+{
+  "firstName": "一郎",
+  "lastName": "山田",
+  "firstNameKana": "いちろう",
+  "lastNameKana": "やまだ",
+  "birthDate": "2015-04-10",
+  "gender": "MALE",
+  "notes": "ピアノとサッカーに興味あり"
+}
+
+### 3-5. 子どもプロフィール削除
+# DELETE {{baseUrl}}/api/{{apiVersion}}/participants/1
+
+### 3-6. 6人目の子ども登録（エラーケース）
+# 注意: 先に5人登録してから実行すること（最大5名制限）
+POST {{baseUrl}}/api/{{apiVersion}}/participants
+Content-Type: application/json
+
+{
+  "participantType": "CHILD",
+  "firstName": "六郎",
+  "lastName": "山田",
+  "firstNameKana": "ろくろう",
+  "lastNameKana": "やまだ",
+  "birthDate": "2018-08-15",
+  "gender": "MALE",
+  "notes": ""
+}
+
+
+###############################################################################
+# 4. Provider（サービス提供者）管理
+###############################################################################
+
+### 4-1. サービス提供者登録申請
+POST {{baseUrl}}/api/{{apiVersion}}/providers
+Content-Type: application/json
+
+{
+  "highSchool": "○○高等学校",
+  "university": "○○大学 音楽学部",
+  "qualifications": [
+    "ピアノ指導者資格",
+    "中学校教諭一種免許状（音楽）"
+  ],
+  "achievements": [
+    "全日本ピアノコンクール入賞",
+    "指導歴10年以上"
+  ],
+  "appealPoint": "初心者から上級者まで、一人ひとりに合わせた丁寧な指導を心がけています。"
+}
+
+### 4-2. サービス提供者情報取得
+GET {{baseUrl}}/api/{{apiVersion}}/providers/1
+Accept: application/json
+
+### 4-3. 自分のサービス提供者情報取得
+GET {{baseUrl}}/api/{{apiVersion}}/providers/me
+Accept: application/json
+
+### 4-4. サービス提供者情報更新
+PATCH {{baseUrl}}/api/{{apiVersion}}/providers/1
+Content-Type: application/json
+
+{
+  "highSchool": "○○高等学校",
+  "university": "○○大学 音楽学部",
+  "qualifications": [
+    "ピアノ指導者資格",
+    "中学校教諭一種免許状（音楽）",
+    "リトミック指導資格"
+  ],
+  "achievements": [
+    "全日本ピアノコンクール入賞",
+    "指導歴12年以上"
+  ],
+  "appealPoint": "初心者から上級者まで、一人ひとりに合わせた丁寧な指導を心がけています。リトミックも対応可能です。"
+}
+
+
+###############################################################################
+# 5. Service（レッスン）管理
+###############################################################################
+
+### 5-1. サービス一覧取得（公開・検索）
+GET {{baseUrl}}/api/{{apiVersion}}/services?page=0&size=20
+Accept: application/json
+
+### 5-2. サービス一覧取得（カテゴリー絞り込み）
+GET {{baseUrl}}/api/{{apiVersion}}/services?categoryId=1&page=0&size=20
+Accept: application/json
+
+### 5-3. サービス詳細取得
+GET {{baseUrl}}/api/{{apiVersion}}/services/1
+Accept: application/json
+
+### 5-4. サービス作成（サービス提供者のみ）
+POST {{baseUrl}}/api/{{apiVersion}}/services
+Content-Type: application/json
+
+{
+  "serviceName": "初心者向けピアノレッスン",
+  "description": "ピアノを始めたばかりの方向けの基礎レッスンです。楽譜の読み方から丁寧に指導します。",
+  "categoryId": 1,
+  "durationMinutes": 60,
+  "deliveryMethod": "IN_PERSON",
+  "location": "東京都渋谷区○○スタジオ",
+  "ticketsRequired": 2,
+  "isActive": true
+}
+
+### 5-5. サービス更新
+PATCH {{baseUrl}}/api/{{apiVersion}}/services/1
+Content-Type: application/json
+
+{
+  "serviceName": "初心者向けピアノレッスン（改訂版）",
+  "description": "ピアノを始めたばかりの方向けの基礎レッスンです。楽譜の読み方から丁寧に指導します。オンライン対応も可能になりました。",
+  "categoryId": 1,
+  "durationMinutes": 60,
+  "deliveryMethod": "IN_PERSON",
+  "location": "東京都渋谷区○○スタジオ / オンライン",
+  "onlineUrl": "https://meet.google.com/xxx-yyyy-zzz",
+  "ticketsRequired": 2,
+  "isActive": true
+}
+
+### 5-6. サービス削除（論理削除）
+# DELETE {{baseUrl}}/api/{{apiVersion}}/services/1
+
+
+###############################################################################
+# 6. Availability（空き枠）管理
+###############################################################################
+
+### 6-1. 空き枠一覧取得（サービスID指定）
+GET {{baseUrl}}/api/{{apiVersion}}/availabilities?serviceId=1&startDate=2026-02-01&endDate=2026-02-28
+Accept: application/json
+
+### 6-2. 空き枠登録
+POST {{baseUrl}}/api/{{apiVersion}}/availabilities
+Content-Type: application/json
+
+{
+  "serviceId": 1,
+  "startDatetime": "2026-02-15T10:00:00",
+  "endDatetime": "2026-02-15T11:00:00",
+  "maxCapacity": 1,
+  "isBookable": true
+}
+
+### 6-3. 空き枠更新
+PATCH {{baseUrl}}/api/{{apiVersion}}/availabilities/1
+Content-Type: application/json
+
+{
+  "startDatetime": "2026-02-15T10:00:00",
+  "endDatetime": "2026-02-15T11:00:00",
+  "maxCapacity": 2,
+  "isBookable": true
+}
+
+### 6-4. 空き枠削除
+# DELETE {{baseUrl}}/api/{{apiVersion}}/availabilities/1
+
+
+###############################################################################
+# 7. Booking（予約）管理
+###############################################################################
+
+### 7-1. 予約一覧取得（自分の予約）
+GET {{baseUrl}}/api/{{apiVersion}}/bookings
+Accept: application/json
+
+### 7-2. 予約一覧取得（ステータス絞り込み）
+GET {{baseUrl}}/api/{{apiVersion}}/bookings?status=CONFIRMED
+Accept: application/json
+
+### 7-3. 予約詳細取得
+GET {{baseUrl}}/api/{{apiVersion}}/bookings/1
+Accept: application/json
+
+### 7-4. 予約作成
+POST {{baseUrl}}/api/{{apiVersion}}/bookings
+Content-Type: application/json
+
+{
+  "availabilityId": 1,
+  "participantId": 1,
+  "notes": "初めてのレッスンです。よろしくお願いします。"
+}
+
+### 7-5. 予約キャンセル（24時間前まで）
+DELETE {{baseUrl}}/api/{{apiVersion}}/bookings/1
+
+### 7-6. 予約作成 - エラーケース（チケット不足）
+POST {{baseUrl}}/api/{{apiVersion}}/bookings
+Content-Type: application/json
+
+{
+  "availabilityId": 2,
+  "participantId": 1,
+  "notes": "2件目の予約"
+}
+
+
+###############################################################################
+# 8. Ticket（チケット）管理
+###############################################################################
+
+### 8-1. チケット残高・履歴取得
+GET {{baseUrl}}/api/{{apiVersion}}/tickets
+Accept: application/json
+
+### 8-2. チケット購入履歴
+GET {{baseUrl}}/api/{{apiVersion}}/tickets/purchase-history
+Accept: application/json
+
+### 8-3. チケット使用履歴
+GET {{baseUrl}}/api/{{apiVersion}}/tickets/usage-history
+Accept: application/json
+
+
+###############################################################################
+# 9. Report（報告書）管理
+###############################################################################
+
+### 9-1. 報告書作成（完了報告）
+POST {{baseUrl}}/api/{{apiVersion}}/reports
+Content-Type: application/json
+
+{
+  "bookingId": 1,
+  "reportType": "COMPLETION",
+  "publicFeedback": "とても良いレッスンでした。次回もよろしくお願いします。",
+  "sharedNotes": "理解度が高く、進捗が早いです。",
+  "privateNotes": "次回は応用編に入れそうです。"
+}
+
+### 9-2. 報告書作成（無断キャンセル報告）
+POST {{baseUrl}}/api/{{apiVersion}}/reports
+Content-Type: application/json
+
+{
+  "bookingId": 2,
+  "reportType": "NO_SHOW",
+  "publicFeedback": "",
+  "sharedNotes": "",
+  "privateNotes": "開始15分経過しても連絡なし。"
+}
+
+### 9-3. 自分の報告書一覧取得（サービス提供者）
+GET {{baseUrl}}/api/{{apiVersion}}/reports/me
+Accept: application/json
+
+
+###############################################################################
+# 10. 管理者専用API
+###############################################################################
+
+### 10-1. メンバー一覧取得（管理者のみ）
+GET {{baseUrl}}/api/{{apiVersion}}/admin/members?page=0&size=20
+Accept: application/json
+
+### 10-2. サービス提供者承認待ち一覧（管理者のみ）
+GET {{baseUrl}}/api/{{apiVersion}}/admin/providers/pending
+Accept: application/json
+
+### 10-3. サービス提供者承認（管理者のみ）
+PATCH {{baseUrl}}/api/{{apiVersion}}/admin/providers/1/approve
+Content-Type: application/json
+
+{
+  "approvalNote": "書類確認完了。承認します。"
+}
+
+### 10-4. サービス提供者却下（管理者のみ）
+PATCH {{baseUrl}}/api/{{apiVersion}}/admin/providers/1/reject
+Content-Type: application/json
+
+{
+  "rejectionReason": "提出書類に不備があります。再提出をお願いします。"
+}
+
+### 10-5. チケット手動付与（管理者のみ）
+POST {{baseUrl}}/api/{{apiVersion}}/admin/tickets
+Content-Type: application/json
+
+{
+  "memberId": 1,
+  "quantity": 10,
+  "notes": "振込確認済み（2026/01/30）"
+}
+
+### 10-6. 統計情報取得（管理者のみ）
+GET {{baseUrl}}/api/{{apiVersion}}/admin/statistics?startDate=2026-01-01&endDate=2026-01-31
+Accept: application/json
+
+
+###############################################################################
+# 11. カテゴリー・マスタデータ取得
+###############################################################################
+
+### 11-1. カテゴリー一覧取得
+GET {{baseUrl}}/api/{{apiVersion}}/categories
+Accept: application/json
+
+### 11-2. サービス種別一覧取得（Phase 4以降）
+# GET {{baseUrl}}/api/{{apiVersion}}/service-types
+# Accept: application/json
+
+
+###############################################################################
+# 12. エラーケーステスト
+###############################################################################
+
+### 12-1. 存在しないリソース（404 Not Found）
+GET {{baseUrl}}/api/{{apiVersion}}/members/99999
+Accept: application/json
+
+### 12-2. 権限不足（403 Forbidden）
+# 注意: 一般メンバーでログイン後、管理者専用APIにアクセス
+GET {{baseUrl}}/api/{{apiVersion}}/admin/members
+Accept: application/json
+
+### 12-3. 認証エラー（401 Unauthorized）
+# 注意: ログアウト後に実行
+GET {{baseUrl}}/api/{{apiVersion}}/members/me
+Accept: application/json
+
+### 12-4. バリデーションエラー（400 Bad Request）
+POST {{baseUrl}}/api/{{apiVersion}}/participants
+Content-Type: application/json
+
+{
+  "participantType": "CHILD",
+  "firstName": "",
+  "lastName": "",
+  "birthDate": "2030-01-01",
+  "gender": "INVALID"
+}
+```
+
+---
+
+## 📝 使い方
+
+### 1. VSCode拡張機能インストール
+
+1. VSCode起動
+2. 拡張機能アイコンをクリック
+3. "REST Client" で検索
+4. "REST Client" by Huachao Mao をインストール
+
+### 2. テストファイル実行
+
+1. `docs/90_test/auth.http` を開く
+2. 各セクションの上にある「**Send Request**」をクリック
+3. 右側にレスポンスが表示される
+
+### 3. セッション管理
+
+REST Clientは **Cookieを自動保存** するため、以下の流れでテスト可能:
+```
+1. auth.http でログイン → セッションCookie保存
+2. test-api.http で認証必須APIをテスト → Cookie自動送信
+3. auth.http でログアウト → Cookie削除

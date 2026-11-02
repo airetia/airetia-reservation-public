@@ -1,0 +1,191 @@
+/* frontend/src/pages/member/ProviderApplicationPage.module.css */
+
+.page    { max-width: 700px; margin: 0 auto; padding: 24px 16px 64px; }
+.title   { font-size: 1.4rem; font-weight: 700; color: var(--navy, #191970); margin: 0 0 24px; }
+
+/* ── ステップインジケーター ──────────────────────────────────────────────── */
+
+.steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 32px;
+  overflow-x: auto;
+}
+
+.stepItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  position: relative;
+}
+.stepItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #e0e0f0;
+  z-index: 0;
+}
+.active.stepItem::after { background: var(--navy, #191970); }
+
+.stepNum {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e0e0f0;
+  color: #888;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  transition: background 0.15s;
+}
+.active .stepNum  { background: var(--navy, #191970); color: #fff; }
+.done   .stepNum  { background: #10b981; color: #fff; }
+
+.stepDesc { font-size: 0.72rem; color: #888; white-space: nowrap; }
+.active .stepDesc { color: var(--navy, #191970); font-weight: 600; }
+
+/* ── フォーム ────────────────────────────────────────────────────────────── */
+
+.form {
+  background: #fff;
+  border: 1px solid #e8e8f0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(25,25,112,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listRow  { display: flex; gap: 10px; align-items: flex-start; }
+.row      { display: flex; gap: 12px; }
+
+.field { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.field label { font-size: 0.83rem; font-weight: 600; color: var(--navy, #191970); }
+.required { color: var(--pink-primary, #ed53a3); margin-left: 2px; }
+.fieldError { font-size: 0.78rem; color: #c00; }
+
+.field input,
+.field select,
+.field textarea {
+  padding: 8px 11px;
+  border: 1px solid #d0d0ee;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--color-text, #3c3c3b);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus { border-color: var(--navy, #191970); }
+
+.counter     { font-size: 0.75rem; color: #aaa; text-align: right; }
+.appealText  { resize: vertical; min-height: 100px; }
+
+.addBtn {
+  padding: 6px 14px;
+  background: #f0f4ff;
+  border: 1px dashed #b0c0e8;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: var(--navy, #191970);
+  cursor: pointer;
+  transition: background 0.13s;
+}
+.addBtn:hover { background: #e0e8ff; }
+
+.removeBtn {
+  padding: 6px 10px;
+  background: none;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  color: #c00;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 22px;
+}
+.removeBtn:hover { background: #fff2f2; }
+
+.filename { font-size: 0.82rem; color: #555; margin-top: 4px; }
+
+/* ── ボタン行 ────────────────────────────────────────────────────────────── */
+
+.btnRow { display: flex; gap: 10px; justify-content: flex-end; margin-top: 4px; }
+
+.backBtn {
+  padding: 9px 20px;
+  background: #f4f4fb;
+  color: var(--navy, #191970);
+  border: 1px solid #d0d0ee;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.backBtn:hover { background: #e8e8f8; }
+
+.nextBtn {
+  padding: 9px 24px;
+  background: var(--navy, #191970);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.nextBtn:hover:not(:disabled) { opacity: 0.85; }
+.nextBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── 確認画面 ────────────────────────────────────────────────────────────── */
+
+.confirmList { display: flex; flex-direction: column; gap: 0; }
+.confirmList dt { font-size: 0.78rem; color: #888; font-weight: 700; margin-top: 12px; }
+.confirmList dd { font-size: 0.9rem; color: var(--color-text, #3c3c3b); margin: 2px 0 0; }
+
+.errorMsg {
+  padding: 10px 14px;
+  background: #fff2f2;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #c00;
+}
+
+/* ── 完了画面 ────────────────────────────────────────────────────────────── */
+
+.complete {
+  text-align: center;
+  padding: 48px 24px;
+  background: #fff;
+  border: 1px solid #e8e8f0;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(25,25,112,0.05);
+}
+.completeIcon { font-size: 3rem; margin-bottom: 16px; }
+.done { /* step item that is completed */ }
+
+/* Step3 確認画面コンテナ */
+.confirm {
+  background: #fff;
+  border: 1px solid #e8e8f0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(25,25,112,0.05);
+}

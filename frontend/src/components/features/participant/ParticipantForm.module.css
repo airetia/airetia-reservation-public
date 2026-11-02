@@ -1,0 +1,89 @@
+/* frontend/src/components/features/participant/ParticipantForm.module.css */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .row { grid-template-columns: 1fr; }
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding-top: 4px;
+}
+
+.btnCancel {
+  padding: 9px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.btnSubmit {
+  padding: 9px 18px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-primary, var(--color-primary));
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.btnSubmit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted, #6b7280);
+}
+
+.required {
+  color: var(--color-danger, #ef4444);
+}
+
+.input, .select {
+  padding: 0.5rem 0.75rem;
+  border: 1.5px solid var(--color-border, #e5e7eb);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  background: var(--color-bg, #fff);
+  width: 100%;
+  transition: border-color 0.15s;
+}
+
+.input:focus, .select:focus {
+  outline: none;
+  border-color: var(--color-primary, #ed53a3);
+}
+
+.inputError {
+  border-color: var(--color-danger, #ef4444) !important;
+}
+
+.errorMsg {
+  font-size: 0.75rem;
+  color: var(--color-danger, #ef4444);
+  margin: 0;
+}

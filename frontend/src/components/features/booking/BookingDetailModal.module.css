@@ -1,0 +1,105 @@
+/* =========================================
+ * BookingDetailModalスタイル
+ * ========================================= */
+
+.content {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.section {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.sectionTitle {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+  gap: var(--spacing-md);
+}
+
+.label {
+  color: var(--text-secondary);
+  min-width: 100px;
+}
+
+.value {
+  color: var(--text-primary);
+  font-weight: 500;
+  text-align: right;
+  flex: 1;
+}
+
+.status {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+}
+
+.status.CONFIRMED {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status.COMPLETED {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status.CANCELLED_BY_USER,
+.status.CANCELLED_BY_PROVIDER {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+
+.status.NO_SHOW {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.link {
+  color: var(--color-primary);
+  text-decoration: none;
+  word-break: break-all;
+  font-size: var(--font-size-sm);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.address,
+.notes {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}

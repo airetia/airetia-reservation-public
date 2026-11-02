@@ -1,0 +1,64 @@
+/* frontend/src/pages/error/ForbiddenPage.module.css
+   =====================================================
+   403 アクセス禁止ページ スタイル
+   ブランドデザインガイドライン v1.0.0 準拠
+   ===================================================== */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-4);
+  background: var(--color-bg-page);            /* #f8f5ff */
+  text-align: center;
+}
+
+/* ── エラーコード ── */
+.code {
+  font-size: 6rem;
+  font-weight: var(--font-weight-extrabold);   /* 900 */
+  color: var(--color-warning-border);          /* #f9a825 */
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* ── タイトル ── */
+.title {
+  font-size: var(--font-size-2xl);             /* 1.5rem / 24px */
+  font-weight: var(--font-weight-bold);        /* 700 */
+  color: var(--color-heading);                 /* #191970 */
+  margin: 0;
+}
+
+/* ── 説明文 ── */
+.desc {
+  font-size: var(--font-size-md);              /* 1rem */
+  color: var(--color-text-muted);             /* #9e9e9e */
+  max-width: 400px;
+  line-height: 1.75;
+}
+
+/* ── ボタン ── */
+.btn {
+  display: inline-block;
+  padding: 0.75rem var(--space-8);
+  background: var(--color-primary);           /* #ed53a3 */
+  color: var(--color-text-inverse);           /* #ffffff */
+  border: none;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);   /* 600 */
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-fast), box-shadow var(--transition-base);
+  margin-top: var(--space-2);
+  letter-spacing: 0.04em;
+}
+
+.btn:hover {
+  background: var(--color-primary-dark);      /* #c21875 */
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-primary);
+}

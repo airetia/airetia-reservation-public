@@ -1,0 +1,137 @@
+/* frontend/src/pages/member/ProfilePage.module.css */
+
+/* ── ページ ─────────────────────────────────────────────────────────────── */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy, #191970);
+  margin: 0;
+}
+
+/* ── カードヘッダー ──────────────────────────────────────────────────────── */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy, #191970);
+  margin: 0 0 16px;   /* cardHeader 内では cardHeader の margin-bottom が優先 */
+}
+
+/* ── フィールドグループ ──────────────────────────────────────────────────── */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* 横並び（姓・名）*/
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navy, #191970);
+}
+
+.required {
+  color: var(--pink-primary, #ed53a3);
+}
+
+/* ── 表示値（非編集時）──────────────────────────────────────────────────── */
+.value {
+  font-size: 0.97rem;
+  color: var(--text-primary, #212529);
+  margin: 0;
+  padding: 9px 0;
+  min-height: 38px;       /* 編集時の input と高さを揃える */
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+}
+
+/* ── 入力フィールド（編集時）────────────────────────────────────────────── */
+.input {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 0.95rem;
+  border: 1.5px solid #d0d0ee;
+  border-radius: 8px;
+  color: var(--text-primary, #212529);
+  background: #fff;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+  font-family: inherit;
+  min-height: 40px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--navy, #191970);
+}
+
+.inputError {
+  border-color: var(--error, #dc3545);
+}
+
+.error {
+  font-size: 0.8rem;
+  color: var(--error, #dc3545);
+}
+
+/* ── ボタン行 ────────────────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid #eee;
+}
+
+/* ── 注記 ─────────────────────────────────────────────────────────────────── */
+.note {
+  font-size: 0.83rem;
+  color: var(--text-muted, #6c757d);
+  margin: 12px 0 0;
+}
+
+/* ── レスポンシブ ────────────────────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .actions {
+    flex-direction: column-reverse;
+  }
+  /* すべての input が画面幅を超えないよう明示 */
+  .input {
+    max-width: 100%;
+  }
+}

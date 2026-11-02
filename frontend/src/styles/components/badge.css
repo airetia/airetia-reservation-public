@@ -1,0 +1,18 @@
+/* frontend/src/styles/components/badge.css */
+
+/* ブッキングステータスバッジ */
+.badge { display:inline-flex; align-items:center; padding:.15rem .55rem; border-radius:var(--border-radius-full); font-size:var(--font-size-xs); font-weight:var(--font-weight-medium); }
+
+.pending   { background:var(--color-warning-bg); color:#92400e; }
+.confirmed { background:var(--color-success-bg); color:#065f46; }
+.completed { background:var(--color-bg-muted);   color:var(--color-text-muted); }
+.cancelled { background:var(--color-danger-bg);  color:var(--color-danger-dark); }
+.noShow    { background:var(--color-danger-bg);  color:var(--color-danger-dark); }
+
+/* プロバイダーステータス */
+.approved         { background:var(--color-success-bg); color:#065f46; }
+.pendingDocs      { background:var(--color-warning-bg); color:#92400e; }
+.pendingReview    { background:var(--color-info-bg);    color:var(--color-info); }
+.rejected         { background:var(--color-danger-bg);  color:var(--color-danger-dark); }
+.onHold           { background:var(--color-warning-bg); color:#92400e; }
+.suspended        { background:var(--color-bg-muted);   color:var(--color-text-muted); }

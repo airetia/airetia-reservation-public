@@ -1,0 +1,22 @@
+/* frontend/src/styles/components/form.css */
+
+.formGroup { display:flex; flex-direction:column; gap:var(--spacing-xs); margin-bottom:var(--spacing-md); }
+.label { font-size:var(--font-size-sm); font-weight:var(--font-weight-medium); color:var(--color-text); }
+.required::after { content:' *'; color:var(--color-danger); }
+
+.input, .select, .textarea {
+  width:100%; padding:.625rem .875rem;
+  border:1.5px solid var(--color-border); border-radius:var(--border-radius-md);
+  font-size:var(--font-size-sm); font-family:inherit;
+  color:var(--color-text); background:var(--color-bg);
+  transition:border-color var(--transition-fast),box-shadow var(--transition-fast);
+}
+.input:focus,.select:focus,.textarea:focus {
+  outline:none; border-color:var(--color-primary);
+  box-shadow:0 0 0 3px var(--color-primary-alpha);
+}
+.error { border-color:var(--color-danger) !important; }
+.errorText { font-size:var(--font-size-xs); color:var(--color-danger); margin-top:var(--spacing-xs); }
+.textarea { resize:vertical; min-height:100px; }
+.charCount { font-size:var(--font-size-xs); color:var(--color-text-muted); text-align:right; margin-top:var(--spacing-xs); }
+.charCount.over { color:var(--color-danger); }

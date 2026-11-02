@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>airetia｜先生・講師として活躍しませんか？</title>
+  <meta name="description" content="空き時間を副収入に。審査制の安心プラットフォームで自分のペースでレッスンを提供できます。"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    :root{
+      --navy:#191970;--sky:#38b6ff;--sky-d:#0090d4;
+      --purple:#a364e2;--yellow:#FFD600;
+      --bg:#f0f4ff;--text:#1a1a2e;--muted:#555570;--w:480px
+    }
+    body{background:var(--bg);color:var(--text);font-family:"Hiragino Sans","Yu Gothic",sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--w);margin:0 auto;padding:0 20px}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+    .fu{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+    .fu.v{opacity:1;transform:translateY(0)}
+
+    /* HERO */
+    #hero{background:linear-gradient(150deg,var(--navy) 0%,#1a2a8a 50%,#1a3a6a 100%);padding:60px 0 70px;text-align:center;position:relative;overflow:hidden}
+    #hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 30%,rgba(56,182,255,.18) 0%,transparent 45%),radial-gradient(circle at 85% 70%,rgba(163,100,226,.15) 0%,transparent 45%);pointer-events:none}
+    .hbadge{display:inline-block;background:linear-gradient(135deg,var(--sky),var(--purple));color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.08em;padding:5px 16px;border-radius:30px;margin-bottom:22px;animation:fadeUp .6s ease-out both}
+    .htitle{font-size:2.05rem;font-weight:900;line-height:1.35;color:#fff;margin-bottom:16px;animation:fadeUp .65s .1s ease-out both}
+    .htitle em{font-style:normal;background:linear-gradient(90deg,var(--sky),#a8e6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hsub{font-size:.97rem;color:rgba(255,255,255,.75);line-height:1.9;margin-bottom:32px;animation:fadeUp .65s .2s ease-out both}
+    .sim{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:20px;padding:22px 20px;margin-bottom:32px;animation:fadeUp .65s .3s ease-out both}
+    .slbl{font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;letter-spacing:.08em;margin-bottom:12px}
+    .sr{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.88rem}
+    .sr:last-child{border:none;border-top:1px solid rgba(255,255,255,.2);padding-top:12px;margin-top:4px}
+    .sk{color:rgba(255,255,255,.65)}
+    .sv{font-weight:800;color:#fff}
+    .sv.big{font-size:1.4rem;background:linear-gradient(90deg,var(--sky),#a8e6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    /* ボタン */
+    .btn{display:block;width:100%;max-width:340px;margin:0 auto;padding:18px 24px;background:linear-gradient(135deg,var(--sky),var(--sky-d));color:#fff;font-size:1.05rem;font-weight:900;letter-spacing:.04em;text-decoration:none;text-align:center;border-radius:50px;box-shadow:0 6px 24px rgba(0,144,212,.4);transition:transform .2s;animation:pulse 3s ease-in-out infinite}
+    .btn:hover{transform:translateY(-2px) scale(1.02)}
+    .btn small{display:block;font-size:.72rem;font-weight:500;opacity:.85;margin-top:3px}
+    .btn.noanim{animation:none}
+
+    /* セクション共通 */
+    .sec{padding:64px 0}
+    .wh{background:#fff}
+    .dk{background:var(--navy);color:#fff}
+    .ey{font-size:.75rem;font-weight:800;letter-spacing:.12em;color:var(--sky-d);text-align:center;margin-bottom:10px}
+    .dk .ey{color:var(--sky)}
+    .st{font-size:1.5rem;font-weight:900;color:var(--navy);text-align:center;line-height:1.4;margin-bottom:36px}
+    .dk .st{color:#fff}
+
+    /* 課題リスト */
+    .pl{display:grid;gap:14px}
+    .pi{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1.5px solid rgba(56,182,255,.3);border-radius:14px;padding:18px 16px}
+    .pi .ico{font-size:1.6rem;flex-shrink:0;margin-top:2px}
+    .pi p{font-size:.93rem;font-weight:600;line-height:1.6}
+    .pi p span{display:block;font-size:.82rem;color:var(--muted);font-weight:500;margin-top:3px}
+    .arr{text-align:center;padding:20px 0;font-size:1.8rem;color:var(--sky-d)}
+
+    /* 特徴カード */
+    .fl{display:grid;gap:20px}
+    .fc{background:var(--bg);border-radius:20px;padding:28px 24px;border:1.5px solid rgba(56,182,255,.25);position:relative;overflow:hidden}
+    .fc::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--sky),var(--purple));border-radius:4px 0 0 4px}
+    .fnum{font-size:.7rem;font-weight:800;letter-spacing:.1em;color:var(--sky-d);margin-bottom:8px}
+    .ficon{font-size:2.2rem;margin-bottom:10px;display:block}
+    .ftitle{font-size:1.1rem;font-weight:900;color:var(--navy);margin-bottom:8px}
+    .fdesc{font-size:.9rem;color:var(--muted);line-height:1.8}
+    .ftag{display:inline-block;margin-top:12px;background:linear-gradient(135deg,var(--sky),var(--sky-d));color:#fff;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px}
+
+    /* ステップ */
+    .steps{display:grid;position:relative}
+    .steps::before{content:"";position:absolute;left:28px;top:28px;bottom:28px;width:2px;background:linear-gradient(180deg,var(--sky),var(--purple))}
+    .si{display:flex;gap:20px;align-items:flex-start;padding:20px 0}
+    .sc{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--sky),var(--sky-d));display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 4px 16px rgba(56,182,255,.4);position:relative;z-index:1}
+    .sb{padding-top:8px}
+    .sttl{font-size:1rem;font-weight:800;margin-bottom:4px;color:#fff}
+    .sdesc{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.7}
+
+    /* 報酬表 */
+    .rbox{background:#fff;border-radius:20px;padding:28px 24px;margin-bottom:16px;border:2px solid rgba(56,182,255,.3)}
+    .rrow{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--bg);font-size:.92rem}
+    .rrow:last-child{border:none;background:linear-gradient(135deg,#f0f8ff,#f5f0ff);margin:0 -24px -28px;padding:18px 24px;border-radius:0 0 18px 18px}
+    .rkey{color:var(--muted);font-weight:600}
+    .rval{font-weight:800;color:var(--navy)}
+    .rval.ac{font-size:1.6rem;color:var(--sky-d)}
+
+    /* 口コミ */
+    .tlist{display:grid;gap:16px}
+    .tcard{background:#fff;border-radius:20px;padding:24px 20px;box-shadow:0 4px 20px rgba(25,25,112,.07);border:1.5px solid rgba(56,182,255,.2)}
+    .tstar{color:var(--yellow);font-size:1rem;margin-bottom:10px;letter-spacing:2px}
+    .tcomment{font-size:.92rem;line-height:1.85;margin-bottom:16px;padding-left:12px;border-left:3px solid var(--sky)}
+    .tauthor{font-size:.82rem;font-weight:700;color:var(--muted)}
+
+    /* Final CTA */
+    #fcta{padding:72px 0;background:linear-gradient(160deg,var(--navy),#0d1a5a);text-align:center;position:relative;overflow:hidden}
+    #fcta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(56,182,255,.2) 0%,transparent 50%),radial-gradient(circle at 80% 50%,rgba(163,100,226,.15) 0%,transparent 50%);pointer-events:none}
+    .fttl{font-size:1.7rem;font-weight:900;color:#fff;line-height:1.4;margin-bottom:12px}
+    .fttl em{font-style:normal;background:linear-gradient(90deg,var(--sky),#a8e6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .fsub{font-size:.92rem;color:rgba(255,255,255,.7);margin-bottom:36px;line-height:1.8}
+    .bdgs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+    .bdg{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:30px;padding:6px 14px;font-size:.78rem;color:rgba(255,255,255,.85);font-weight:600}
+
+    /* フッター */
+    footer{background:#080820;padding:24px 20px;text-align:center}
+    .flinks{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:14px}
+    .flinks a{font-size:.75rem;color:rgba(255,255,255,.4);text-decoration:none}
+    .flinks a:hover{color:var(--sky)}
+    .fcopy{font-size:.7rem;color:rgba(255,255,255,.2)}
+
+    /* 固定CTA */
+    #sticky{position:fixed;bottom:0;left:0;right:0;padding:12px 20px;background:rgba(240,244,255,.96);backdrop-filter:blur(10px);border-top:1.5px solid rgba(56,182,255,.3);z-index:100;transform:translateY(100%);transition:transform .35s}
+    #sticky.show{transform:translateY(0)}
+
+    @media(min-width:640px){:root{--w:560px}.htitle{font-size:2.4rem}}
+    @media(min-width:1024px){:root{--w:640px}}
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap">
+    <p class="hbadge">👩‍🏫 先生・講師の方へ</p>
+    <h1 class="htitle">あなたのスキルを、<br><em>副収入</em>に変えよう。<br>空き時間だけでOK。</h1>
+    <p class="hsub">airetiaは審査済みの先生だけが活動できる<br>安心・安全な教えるプラットフォーム。<br>週1時間からでも始められます。</p>
+    <div class="sim">
+      <p class="slbl">💰 月10回レッスンのシミュレーション</p>
+      <div class="sr"><span class="sk">チケット単価</span><span class="sv">¥500 / 枚</span></div>
+      <div class="sr"><span class="sk">先生への報酬率</span><span class="sv">40%</span></div>
+      <div class="sr"><span class="sk">1回4枚消費 × 10回</span><span class="sv">40枚分</span></div>
+      <div class="sr"><span class="sk">月間報酬（概算）</span><span class="sv big">¥8,000〜</span></div>
+    </div>
+    <div style="animation:fadeUp .65s .4s ease-out both">
+      <a href="/register" class="btn">先生として無料登録する<small>審査申請まで無料・登録30秒</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="sec wh">
+  <div class="wrap">
+    <p class="ey">こんなお悩みありませんか？</p>
+    <h2 class="st">教えることへの<br>こんな不満、感じていませんか？</h2>
+    <div class="pl">
+      <div class="pi fu"><span class="ico">😔</span><p>スキルはあるのに活かす場所がない<span>資格・経験があっても副業の始め方がわからない</span></p></div>
+      <div class="pi fu"><span class="ico">😤</span><p>生徒募集・集客が大変すぎる<span>SNSで宣伝しても反応が薄く、続けられない</span></p></div>
+      <div class="pi fu"><span class="ico">😰</span><p>保護者とのお金・キャンセルのやり取りがストレス<span>決済・連絡・スケジュール管理が面倒</span></p></div>
+      <div class="pi fu"><span class="ico">🤔</span><p>個人情報をどこまで開示すべきか不安<span>自宅住所や電話番号を知られたくない</span></p></div>
+    </div>
+  </div>
+</section>
+
+<div class="arr">↓</div>
+
+<!-- FEATURES -->
+<section class="sec">
+  <div class="wrap">
+    <p class="ey">Solution</p>
+    <h2 class="st">airetiaなら<br>全部まるごと解決</h2>
+    <div class="fl">
+      <div class="fc fu">
+        <p class="fnum">POINT 01</p><span class="ficon">📅</span>
+        <h3 class="ftitle">完全自分ペース・空き時間だけ</h3>
+        <p class="fdesc">提供できる日時を自分でカレンダー登録するだけ。週1時間でも週10時間でも自由自在。本業・育児と両立できます。</p>
+        <span class="ftag">副業・複業OK</span>
+      </div>
+      <div class="fc fu">
+        <p class="fnum">POINT 02</p><span class="ficon">💼</span>
+        <h3 class="ftitle">集客・決済・連絡はすべてお任せ</h3>
+        <p class="fdesc">生徒募集・チケット決済・予約管理はすべてプラットフォームが担当。先生はレッスンに集中するだけでOKです。</p>
+        <span class="ftag">事務作業ゼロ</span>
+      </div>
+      <div class="fc fu">
+        <p class="fnum">POINT 03</p><span class="ficon">🔒</span>
+        <h3 class="ftitle">個人情報は最小限しか開示されない</h3>
+        <p class="fdesc">保護者への開示は氏名・サービス内容のみ。住所・電話番号は一切共有されません。プラットフォーム経由で安全にやり取りできます。</p>
+        <span class="ftag">プライバシー保護</span>
+      </div>
+      <div class="fc fu">
+        <p class="fnum">POINT 04</p><span class="ficon">💰</span>
+        <h3 class="ftitle">月末締め・翌月10日払いで安定収入</h3>
+        <p class="fdesc">報酬率40%・月末集計・翌月10日に振込。毎月きっちり支払われるので副業としての計画が立てやすいです。</p>
+        <span class="ftag">報酬率40%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec dk">
+  <div class="wrap">
+    <p class="ey">How it Works</p>
+    <h2 class="st">活動開始まで5ステップ</h2>
+    <div class="steps">
+      <div class="si fu"><div class="sc">1</div><div class="sb"><h3 class="sttl">無料会員登録（30秒）</h3><p class="sdesc">メールアドレスとパスワードだけ。費用は一切かかりません。</p></div></div>
+      <div class="si fu"><div class="sc">2</div><div class="sb"><h3 class="sttl">プロバイダー申請</h3><p class="sdesc">基本情報・資格・実績を入力し、身分証・契約書・口座情報をアップロードします。</p></div></div>
+      <div class="si fu"><div class="sc">3</div><div class="sb"><h3 class="sttl">審査（3営業日以内）</h3><p class="sdesc">管理者が書類を確認。承認・却下はメールでお知らせします。</p></div></div>
+      <div class="si fu"><div class="sc">4</div><div class="sb"><h3 class="sttl">サービス・空き枠を登録</h3><p class="sdesc">提供したいレッスン内容と担当できる日時を登録します。</p></div></div>
+      <div class="si fu"><div class="sc">5</div><div class="sb"><h3 class="sttl">予約が入ったらレッスン開始</h3><p class="sdesc">予約確定通知が届いたらレッスンを実施。月末に報酬が振り込まれます。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REWARD SIMULATION -->
+<section class="sec wh">
+  <div class="wrap">
+    <p class="ey">Simulation</p>
+    <h2 class="st">報酬シミュレーション</h2>
+    <div class="rbox fu">
+      <div class="rrow"><span class="rkey">チケット単価</span><span class="rval">¥500（税抜）</span></div>
+      <div class="rrow"><span class="rkey">先生の報酬率</span><span class="rval">40%</span></div>
+      <div class="rrow"><span class="rkey">1回4枚消費 × 月20回</span><span class="rval">80枚分</span></div>
+      <div class="rrow"><span class="rkey">月間報酬（概算）</span><span class="rval ac">¥16,000</span></div>
+    </div>
+    <p style="font-size:.8rem;color:var(--muted);line-height:1.8;text-align:center">
+      ※ 振込手数料別途。実際の報酬はレッスン内容・枚数設定によって異なります。
+    </p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec">
+  <div class="wrap">
+    <p class="ey">Voice</p>
+    <h2 class="st">先生たちの声</h2>
+    <div class="tlist">
+      <div class="tcard fu">
+        <p class="tstar">★★★★★</p>
+        <p class="tcomment">「自分のスケジュールに合わせて空き枠を登録できるので、本業と両立しながら続けられています。報酬の支払いも毎月きっちりしていただけるので信頼できます。」</p>
+        <p class="tauthor">A.N さん ／ 現役講師（副業）</p>
+      </div>
+      <div class="tcard fu">
+        <p class="tstar">★★★★★</p>
+        <p class="tcomment">「集客や決済の心配がなく、レッスンだけに集中できます。保護者との個人的なやり取りが不要なのも安心です。」</p>
+        <p class="tauthor">M.T さん ／ フリーランス講師</p>
+      </div>
+      <div class="tcard fu">
+        <p class="tstar">★★★★☆</p>
+        <p class="tcomment">「書類審査は少し手間でしたが、それがあることで利用者の方に信頼してもらえていると感じます。ダッシュボードも使いやすい。」</p>
+        <p class="tauthor">K.R さん ／ 元教員（副業）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="fcta">
+  <div class="wrap">
+    <h2 class="fttl fu">あなたの経験を、<br><em>収入と誰かの成長</em>に。</h2>
+    <p class="fsub fu">登録・審査申請は無料です。<br>まずはアカウントを作成してください。</p>
+    <div class="bdgs fu">
+      <span class="bdg">🔒 個人情報保護</span>
+      <span class="bdg">📋 全員審査制</span>
+      <span class="bdg">💰 月末払い保証</span>
+    </div>
+    <a href="/register" class="btn fu">先生として無料登録する<small>審査申請まで完全無料</small></a>
+  </div>
+</section>
+
+<footer>
+  <div class="flinks">
+    <a href="/privacy">プライバシーポリシー</a>
+    <a href="/termsOfService">利用規約</a>
+    <a href="/legal-notice">特定商取引法</a>
+    <a href="/contact">お問い合わせ</a>
+    <a href="/">公式サイトへ</a>
+  </div>
+  <p class="fcopy">© 2026 airetia. All rights reserved.</p>
+</footer>
+
+<div id="sticky">
+  <a href="/register" class="btn noanim">先生として無料登録する<small>審査申請まで完全無料</small></a>
+</div>
+
+<script>
+  const ob = new IntersectionObserver(
+    es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); ob.unobserve(e.target); } }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.fu').forEach(el => ob.observe(el));
+  const sticky = document.getElementById('sticky');
+  new IntersectionObserver(
+    es => es.forEach(e => sticky.classList.toggle('show', !e.isIntersecting)),
+    { threshold: 0 }
+  ).observe(document.getElementById('hero'));
+</script>
+</body>
+</html>

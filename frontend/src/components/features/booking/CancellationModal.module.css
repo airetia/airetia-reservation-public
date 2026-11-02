@@ -1,0 +1,88 @@
+/* =========================================
+ * BookingListCardスタイル
+ * ========================================= */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.main {
+  cursor: pointer;
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.status {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status.CONFIRMED {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.status.COMPLETED {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.status.CANCELLED_BY_USER,
+.status.CANCELLED_BY_PROVIDER {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+
+.status.NO_SHOW {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+}
+
+.label {
+  color: var(--text-secondary);
+}
+
+.value {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border-color);
+}

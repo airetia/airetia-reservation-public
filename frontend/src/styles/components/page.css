@@ -1,0 +1,91 @@
+/* frontend/src/styles/components/page.css */
+
+/**
+ * ページ共通スタイル（テーブル・フォーム・バッジ・モーダル等）
+ * → 各ページの module.css から @import するか、同名クラスを使う
+ */
+
+/* ── ページヘッダー ────────────────────── */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+.pageTitle { font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); }
+
+/* ── テーブル ──────────────────────────── */
+.tableWrapper {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.table { width:100%; border-collapse:collapse; font-size:var(--font-size-sm); }
+.table th {
+  text-align:left; padding:var(--spacing-sm) var(--spacing-md);
+  background:var(--color-bg-muted); color:var(--color-text-muted);
+  font-weight:var(--font-weight-semibold);
+  border-bottom:1px solid var(--color-border);
+  white-space:nowrap;
+}
+.table td { padding:var(--spacing-sm) var(--spacing-md); border-bottom:1px solid var(--color-border); vertical-align:middle; }
+.table tr:last-child td { border-bottom:none; }
+.table tr:hover td { background:var(--color-bg-subtle); }
+
+/* ── フォーム要素 ──────────────────────── */
+.field { margin-bottom: var(--spacing-md); }
+.label { display:block; font-size:var(--font-size-sm); font-weight:var(--font-weight-medium); margin-bottom:var(--spacing-xs); }
+.required::after { content:' *'; color:var(--color-danger); }
+.input, .select, .textarea {
+  width:100%; padding:.625rem .875rem;
+  border:1.5px solid var(--color-border); border-radius:var(--border-radius-md);
+  font-size:var(--font-size-sm); font-family:inherit;
+  color:var(--color-text); background:var(--color-bg);
+  transition:border-color var(--transition-fast),box-shadow var(--transition-fast);
+}
+.input:focus, .select:focus, .textarea:focus {
+  outline:none; border-color:var(--color-primary);
+  box-shadow:0 0 0 3px var(--color-primary-alpha);
+}
+.input.error, .select.error, .textarea.error { border-color:var(--color-danger); }
+.errorMsg { margin-top:var(--spacing-xs); font-size:var(--font-size-xs); color:var(--color-danger); }
+.textarea { resize:vertical; min-height:100px; }
+
+/* ── バッジ ────────────────────────────── */
+.badge { display:inline-flex; align-items:center; padding:.15rem .5rem; border-radius:var(--border-radius-full); font-size:var(--font-size-xs); font-weight:var(--font-weight-medium); }
+.badgeSuccess { background:var(--color-success-bg); color:#065f46; }
+.badgeWarning { background:var(--color-warning-bg); color:#92400e; }
+.badgeDanger  { background:var(--color-danger-bg);  color:var(--color-danger-dark); }
+.badgeInfo    { background:var(--color-info-bg);    color:var(--color-info); }
+.badgePrimary { background:var(--color-primary-light); color:var(--color-primary-dark); }
+.badgeNeutral { background:var(--color-bg-muted);   color:var(--color-text-muted); }
+
+/* ── Empty State ───────────────────────── */
+.emptyState { text-align:center; padding:var(--spacing-2xl); color:var(--color-text-muted); font-size:var(--font-size-sm); }
+
+/* ── モーダル ──────────────────────────── */
+.modalOverlay {
+  position:fixed; inset:0; background:rgba(0,0,0,.5);
+  display:flex; align-items:center; justify-content:center;
+  z-index:1000; padding:var(--spacing-md); backdrop-filter:blur(2px);
+}
+.modalContent {
+  background:var(--color-bg); border-radius:var(--border-radius-xl);
+  padding:var(--spacing-xl); width:100%; max-width:480px; max-height:90vh;
+  overflow-y:auto; box-shadow:var(--shadow-lg);
+  animation: modalIn .2s ease;
+}
+@keyframes modalIn { from{opacity:0;transform:scale(.96)} to{opacity:1;transform:scale(1)} }
+.modalTitle { font-size:var(--font-size-lg); font-weight:var(--font-weight-semibold); margin-bottom:var(--spacing-lg); }
+.modalActions {
+  display:flex; justify-content:flex-end; gap:var(--spacing-sm);
+  margin-top:var(--spacing-lg); padding-top:var(--spacing-md);
+  border-top:1px solid var(--color-border);
+}
+
+/* ── カードグリッド ────────────────────── */
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:var(--spacing-lg); }

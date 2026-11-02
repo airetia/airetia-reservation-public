@@ -1,0 +1,449 @@
+# airetia 予約管理システム
+
+---
+
+## 📋 ドキュメント情報
+
+**Version**: 1.0.0  
+**Last Updated**: 2026-02-09  
+**Status**: In Development
+
+---
+
+## 📖 目次
+
+1. [プロジェクト概要](#1-プロジェクト概要)
+2. [システム概要](#2-システム概要)
+3. [技術スタック](#3-技術スタック)
+4. [ドキュメント構成](#4-ドキュメント構成)
+5. [開発ロードマップ](#5-開発ロードマップ)
+6. [クイックスタート](#6-クイックスタート)
+
+---
+
+## 1. プロジェクト概要
+
+### 1.1 プロジェクト名
+**airetia - 子育て総合プラットフォーム（MVP版）**
+
+### 1.2 ビジョン
+全ての人に環境に左右されない無限の選択肢を与え、親の時間を大切にしながら子供に豊かな経験を届けるプラットフォーム。
+
+**airetia（アイトピア）** = 「愛の理想郷」
+
+### 1.3 MVP（Phase 1）の目的
+習い事・レッスン予約管理に特化した最小機能製品を3ヶ月で開発し、市場検証を行う。
+
+**主要機能:**
+- メンバー登録・認証
+- サービス提供者登録・承認
+- レッスン・空き枠管理
+- 予約・キャンセル機能
+- チケット管理（手動付与）
+- メール通知
+
+---
+
+## 2. システム概要
+
+### 2.1 システム構成
+
+```
+┌─────────────────────────────────┐
+│   React SPA (フロントエンド)      │
+│   - 企業HP                       │
+│   - メンバーダッシュボード         │
+│   - 提供者管理画面                │
+│   - 管理者画面                    │
+└─────────────┬───────────────────┘
+              │ REST API (JSON)
+              ↓
+┌─────────────────────────────────┐
+│   Spring Boot (バックエンド)     │
+│   - 認証・認可                   │
+│   - ビジネスロジック              │
+│   - データ管理                    │
+│   - バッチ処理                    │
+└─────────────┬───────────────────┘
+              │ JDBC
+              ↓
+┌─────────────────────────────────┐
+│   MySQL Database                │
+│   - メンバー・提供者・利用者      │
+│   - サービス・空き枠・予約        │
+│   - チケット・ペナルティ          │
+└─────────────────────────────────┘
+```
+
+### 2.2 主要エンティティ
+
+| エンティティ | 役割 | 説明 |
+|------------|------|------|
+| **Member** | メンバーアカウント | 認証主体（ADMIN/MEMBER） |
+| **Provider** | サービス提供者 | レッスン等を提供（管理者承認制） |
+| **Participant** | 利用者 | サービス受講主体（SELF/CHILD） |
+| **Offering** | 提供物 | レッスン等のサービス |
+| **Availability** | 空き枠 | サービス提供可能時間帯 |
+| **Booking** | 予約 | 利用者の予約レコード |
+| **Ticket** | チケット | 予約に使用する単位（500円/枚） |
+
+詳細: [glossary.md](./glossary.md)
+
+---
+
+## 3. 技術スタック
+
+### 3.1 フロントエンド
+
+| 技術 | バージョン | 用途 |
+|------|-----------|------|
+| React | 18.x | UIフレームワーク |
+| TypeScript | 5.x | 型安全性 |
+| Vite | 5.x | ビルドツール |
+| React Router | 6.x | ルーティング |
+| Axios | 1.x | HTTP通信 |
+| CSS Variables | - | スタイリング |
+
+### 3.2 バックエンド
+
+| 技術 | バージョン | 用途 |
+|------|-----------|------|
+| Java | 17 | プログラミング言語 |
+| Spring Boot | 3.2.x | フレームワーク |
+| Spring Security | 6.x | 認証・認可 |
+| Spring Data JPA | 3.x | ORM |
+| MySQL | 8.0+ | RDBMS |
+| Flyway | 9.x | マイグレーション |
+
+### 3.3 インフラ（Phase 1）
+
+- **ホスティング**: AWS EC2 または Heroku
+- **データベース**: AWS RDS (MySQL)
+- **ストレージ**: AWS S3
+- **ドメイン**: AWS Route53
+- **SSL証明書**: AWS ACM
+
+詳細: [backend_specification.md - 技術スタック](./backend_specification.md#2-技術スタック)
+
+---
+
+## 4. ドキュメント構成
+
+本プロジェクトは以下の6つのドキュメントで構成されています。
+
+### 4.1 ドキュメント一覧
+
+| # | ドキュメント | 説明 | 対象読者 |
+|---|------------|------|---------|
+| 1 | **README.md** | プロジェクト概要・導入 | 全員 |
+| 2 | **glossary.md** | 用語定義 | 全員 |
+| 3 | **business_rules.md** | ビジネスルール | PM・開発者・運用 |
+| 4 | **common_specification.md** | 共通仕様 | 開発者 |
+| 5 | **frontend_specification.md** | フロントエンド仕様 | フロントエンド開発者 |
+| 6 | **backend_specification.md** | バックエンド仕様 | バックエンド開発者 |
+
+### 4.2 ドキュメント参照順序
+
+**新規参加者:**
+```
+1. README.md（本ドキュメント）
+2. glossary.md（用語理解）
+3. business_rules.md（ビジネスルール理解）
+4. 担当分野の仕様書
+   - フロントエンド: frontend_specification.md
+   - バックエンド: backend_specification.md
+   - 両方: common_specification.md も参照
+```
+
+**開発者:**
+```
+1. common_specification.md（API契約・データモデル）
+2. business_rules.md（ビジネスロジック）
+3. 担当分野の仕様書
+```
+
+### 4.3 Single Source of Truth（情報の唯一の正）
+
+| 情報カテゴリ | 唯一の正 | 概要のみ | 参照のみ |
+|------------|---------|---------|---------|
+| **用語定義** | glossary.md | - | 全ドキュメント |
+| **ビジネスルール** | business_rules.md | common_specification.md | 各仕様書 |
+| **API契約** | common_specification.md | - | 各仕様書 |
+| **データモデル** | common_specification.md | - | 各仕様書 |
+| **バリデーション** | common_specification.md | - | 各仕様書 |
+| **フロントエンド実装** | frontend_specification.md | - | - |
+| **バックエンド実装** | backend_specification.md | - | - |
+
+---
+
+## 5. 開発ロードマップ
+
+### 5.1 Phase 1: MVP（3ヶ月）
+
+**目標**: 習い事予約管理の基本機能実装
+
+**主要機能:**
+- ✅ メンバー登録・ログイン（セッション認証）
+- ✅ サービス提供者登録・管理者承認
+- ✅ レッスン・空き枠登録
+- ✅ 予約・キャンセル機能
+- ✅ チケット管理（手動付与）
+- ✅ メール通知
+- ✅ 予約解放バッチ（毎日0:00 JST）
+- ✅ 無断キャンセル検知バッチ
+- ✅ ペナルティ管理
+
+**技術選択:**
+- 認証: セッションベース（InMemory）
+- インフラ: 単一EC2 + RDS
+- 決済: なし（チケット手動付与）
+
+**成功基準:**
+- ユーザー登録数: 100名以上
+- サービス提供者: 10名以上
+- 月間予約数: 50件以上
+- システム稼働率: 95%以上
+
+### 5.2 Phase 2: 拡張機能（3ヶ月）
+
+**目標**: ユーザー体験向上・自動化
+
+**追加機能:**
+- オンライン決済（Stripe）
+- JWT + Redis認証（モバイルアプリ対応）
+- サブスクリプションプラン
+- レビュー・評価機能
+- メッセージ機能
+- 売上管理・レポート
+- Auto Scaling
+
+**成功基準:**
+- ユーザー登録数: 1,000名以上
+- 月間予約数: 500件以上
+- システム稼働率: 99%以上
+
+### 5.3 Phase 3: カスタマイズ強化（3ヶ月）
+
+**目標**: 差別化・ユーザー定着
+
+**追加機能:**
+- カルテ機能（指導履歴の構造化）
+- AI推薦機能
+- グループレッスン最適化
+- アプリ化（React Native）
+- 多言語対応
+
+### 5.4 Phase 4: 子育て総合プラットフォーム
+
+**目標**: 事業領域拡大
+
+**追加サービス:**
+- ベビーシッター予約
+- 送迎代行サービス
+- 保育園・幼稚園連携（PTA代行等）
+- 一元的な決済・スケジュール管理
+
+---
+
+## 6. クイックスタート
+
+### 6.1 前提条件
+
+- Node.js 18.x+
+- Java 17+
+- MySQL 8.0+
+- Maven 3.8+
+
+### 6.2 環境構築
+
+**1. リポジトリクローン**
+```bash
+git clone https://github.com/your-org/airetia.git
+cd airetia
+```
+
+**2. データベースセットアップ**
+```bash
+# MySQLにログイン
+mysql -u root -p
+
+# データベース作成
+CREATE DATABASE airetia CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'airetia_user'@'localhost' IDENTIFIED BY 'your_password';
+GRANT ALL PRIVILEGES ON airetia.* TO 'airetia_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+**3. バックエンド起動**
+```bash
+cd backend
+cp .env.example .env
+# .envを編集（DB接続情報等）
+
+mvn clean install
+mvn spring-boot:run
+```
+
+**4. フロントエンド起動**
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+**5. アクセス**
+- フロントエンド: http://localhost:5173
+- バックエンドAPI: http://localhost:8080/api/v1
+
+### 6.3 初期管理者アカウント作成
+
+```bash
+# セットアップスクリプト実行
+./scripts/setup/setup-admin.sh
+
+# または手動で環境変数設定後、アプリ起動
+export ADMIN_INITIAL_EMAIL=admin@airetia.com
+export ADMIN_INITIAL_PASSWORD=<強力なパスワード>
+mvn spring-boot:run
+```
+
+詳細: [backend_specification.md - 環境構築](./backend_specification.md#10-付録-環境別設定)
+
+---
+
+## 7. 主要な設計判断
+
+### 7.1 なぜ最初から汎用的な設計？
+
+**理由**: Phase 4での大規模リファクタリングを回避
+
+- `offerings`テーブル: レッスンだけでなく、ベビーシッター・送迎等にも対応
+- `service_types`マスタ: サービス種別を動的に追加可能
+- `extended_attributes`（JSON）: サービス固有属性を柔軟に管理
+
+**メリット**:
+- Phase 4への移行コストを最小化
+- 将来の拡張性を確保
+- 用語の一貫性を維持
+
+### 7.2 なぜセッション認証を先行？
+
+**Phase 1**: セッションベース（InMemory）
+- MVP開発速度を優先
+- 実装がシンプル
+- 単一EC2で十分
+
+**Phase 2以降**: JWT + Redis
+- モバイルアプリ対応
+- Auto Scaling対応
+- ステートレス化
+
+### 7.3 用語統一の重要性
+
+**統一前（旧）**:
+- users, teachers, students, lessons
+
+**統一後（現在）**:
+- members, providers, participants, offerings
+
+**効果**:
+- Phase 4拡張時のリネームコストゼロ
+- ドキュメント・コード・DBで用語一貫
+- 新規メンバーの理解が容易
+
+---
+
+## 8. 開発ルール
+
+### 8.1 ブランチ戦略
+
+```
+main         # 本番環境（Phase 1完了後）
+  └─ develop # 開発環境（デフォルトブランチ）
+       └─ feature/xxx # 機能開発
+       └─ fix/xxx     # バグ修正
+```
+
+### 8.2 コミットメッセージ
+
+```
+[Type] Summary
+
+- Detail 1
+- Detail 2
+
+[Type]:
+  feat: 新機能
+  fix: バグ修正
+  docs: ドキュメント
+  style: フォーマット
+  refactor: リファクタリング
+  test: テスト
+  chore: その他
+
+例:
+[feat] Add booking cancellation feature
+
+- Implement cancellation policy logic
+- Add refund calculation
+- Send notification emails
+```
+
+### 8.3 コードレビュー
+
+- すべてのPRは必ずレビューを受ける
+- レビュー観点: 機能性、可読性、テスト、セキュリティ
+- 承認後にマージ
+
+---
+
+## 9. トラブルシューティング
+
+### 9.1 よくある問題
+
+**Q: バックエンドが起動しない**
+- MySQL接続情報を確認（.env）
+- ポート8080が使用中でないか確認
+
+**Q: フロントエンドでCORSエラー**
+- バックエンドのCORS設定を確認
+- `WebConfig.java`の`allowedOrigins`
+
+**Q: セッションが維持されない**
+- Cookieの`Secure`属性確認（本番環境ではHTTPS必須）
+- ブラウザのCookie設定
+
+### 9.2 サポート
+
+**ドキュメント参照順序:**
+1. 本README
+2. 各仕様書のトラブルシューティングセクション
+3. プロジェクト内のコメント
+
+**連絡先:**
+- 開発チーム: dev@airetia.com
+- 管理者: admin@airetia.com
+
+---
+
+## 10. ライセンス
+
+（未定）
+
+---
+
+## 11. 変更履歴
+
+### Version 1.0.0 (2026-02-09)
+
+**初版リリース:**
+- プロジェクト概要
+- システム構成図
+- 技術スタック定義
+- 開発ロードマップ（Phase 1-4）
+- クイックスタートガイド
+- ドキュメント構成説明
+
+---
+
+**Document End**

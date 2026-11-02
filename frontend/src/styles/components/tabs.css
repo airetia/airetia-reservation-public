@@ -1,0 +1,39 @@
+/* frontend/src/styles/components/tabs.css */
+
+.tabList {
+  display: flex;
+  border-bottom: 2px solid var(--color-border);
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-lg);
+  overflow-x: auto;
+}
+.tab {
+  padding: .625rem 1.125rem;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.tab:hover { color: var(--color-text); }
+.tabActive {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* カウントバッジ（タブ内） */
+.tabCount {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 18px;
+  background: var(--color-primary-light); color: var(--color-primary);
+  border-radius: var(--border-radius-full);
+  font-size: 11px; font-weight: var(--font-weight-bold);
+  margin-left: var(--spacing-xs); padding: 0 .35rem;
+}
+.tabActive .tabCount { background: var(--color-primary); color: #fff; }

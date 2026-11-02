@@ -1,0 +1,14 @@
+/* frontend/src/components/common/Card.module.css */
+/* → ブランドカラールール §2 カードコンポーネント必須ルール */
+
+.card {
+  background: #ffffff;
+  border: 1px solid #ffffff;          /* 白の縁切り */
+  border-radius: 14px;
+  padding: 20px 24px;                 /* ← ここが重要: コンテンツに十分な余白 */
+  box-shadow: 0 10px 25px rgba(25, 25, 112, 0.08);  /* 構造色の影 */
+}
+
+.noPadding {
+  padding: 0;
+}

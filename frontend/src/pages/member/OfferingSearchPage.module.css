@@ -1,0 +1,467 @@
+/* frontend/src/pages/member/OfferingSearchPage.module.css */
+/* 予約フローは OfferingDetailPage.module.css へ移管済み */
+
+/* ── ページ ─────────────────────────────────────────────────────────────── */
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy, #191970);
+  margin: 0 0 24px;
+}
+
+.centered {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.errorMsg {
+  color: #c00;
+}
+
+/* ── フィルターパネル ────────────────────────────────────────────────────── */
+
+.filterPanel {
+  background: #fff;
+  border: 1px solid #e8e8f0;
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 12px rgba(25, 25, 112, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.filterLabel {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy, #191970);
+  white-space: nowrap;
+  min-width: 72px;
+}
+
+/* キーワード */
+.keywordWrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+  max-width: 360px;
+}
+
+.keywordInput {
+  width: 100%;
+  padding: 8px 32px 8px 12px;
+  border: 1px solid #d8d8ee;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--color-text, #3c3c3b);
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.keywordInput:focus {
+  border-color: var(--pink-primary, #ed53a3);
+}
+
+.clearBtn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 0.85rem;
+  color: #aaa;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+}
+
+.clearBtn:hover { color: #666; }
+
+/* ピルボタン */
+.pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 5px 14px;
+  border: 1px solid #d8d8ee;
+  border-radius: 20px;
+  background: #f8f8fc;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text, #3c3c3b);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.pill:hover {
+  border-color: var(--pink-primary, #ed53a3);
+  color: var(--pink-primary, #ed53a3);
+}
+
+.pillActive {
+  background: var(--pink-primary, #ed53a3) !important;
+  border-color: var(--pink-primary, #ed53a3) !important;
+  color: #fff !important;
+}
+
+/* フッター */
+.filterFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f8;
+}
+
+.filterMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.resultCount {
+  font-size: 0.88rem;
+  color: var(--navy, #191970);
+  font-weight: 600;
+}
+
+.resetBtn {
+  font-size: 0.82rem;
+  color: var(--pink-primary, #ed53a3);
+  background: none;
+  border: 1px solid #ffd0ea;
+  border-radius: 20px;
+  padding: 3px 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.resetBtn:hover { background: #fff0f8; }
+
+.sortWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sortLabel {
+  font-size: 0.82rem;
+  color: var(--color-text-muted, #888);
+  white-space: nowrap;
+}
+
+.sortSelect {
+  padding: 5px 10px;
+  border: 1px solid #d8d8ee;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: var(--navy, #191970);
+  background: #fff;
+  cursor: pointer;
+}
+
+/* ── サービス一覧グリッド ────────────────────────────────────────────────── */
+
+.offeringGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* スケルトン */
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.skeletonCard {
+  height: 180px;
+  background: linear-gradient(90deg, #f0f0f8 25%, #e8e8f4 50%, #f0f0f8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── サービスカード ──────────────────────────────────────────────────────── */
+
+.offeringCard {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #e8e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(25, 25, 112, 0.05);
+  padding: 0;
+}
+
+.offeringCard:hover {
+  border-color: var(--pink-primary, #ed53a3);
+  box-shadow: 0 6px 24px rgba(237, 83, 163, 0.12);
+  transform: translateY(-2px);
+}
+
+/* おすすめスコアバー（カード上部の細帯） */
+.scoreBar {
+  height: 4px;
+  background: #f0f0f8;
+  flex-shrink: 0;
+}
+
+.scoreBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink-primary, #ed53a3), #c8a0e0);
+  transition: width 0.5s;
+}
+
+.cardBody {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.metaRow {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.metaMethod, .metaDuration, .metaTicket {
+  font-size: 0.75rem;
+  border-radius: 20px;
+  padding: 2px 9px;
+  font-weight: 500;
+}
+
+.metaMethod   { background: #e8f4ff; color: #1a6fd4; }
+.metaDuration { background: #f0f9f0; color: #2a7a2a; }
+.metaTicket   { background: #fff0f8; color: var(--pink-primary, #ed53a3); }
+
+.offeringTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy, #191970);
+  margin: 4px 0 2px;
+  line-height: 1.3;
+}
+
+.providerName {
+  font-size: 0.82rem;
+  color: var(--color-text-muted, #888);
+  margin: 0;
+}
+
+.desc {
+  font-size: 0.85rem;
+  color: var(--color-text, #3c3c3b);
+  line-height: 1.55;
+  margin: 4px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.detailCta {
+  display: block;
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 0.82rem;
+  color: var(--pink-primary, #ed53a3);
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ── 空状態 ─────────────────────────────────────────────────────────────── */
+
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.emptyText {
+  color: var(--color-text-muted, #888);
+  margin-bottom: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   タブ
+   ═══════════════════════════════════════════════════════════════ */
+
+.tabRow {
+  display: flex;
+  gap: 4px;
+  border-bottom: 2px solid #e0e0f0;
+  margin-bottom: 24px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 22px;
+  border: none;
+  background: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s;
+}
+.tab:hover { color: var(--navy, #191970); }
+
+.tabActive {
+  color: var(--navy, #191970) !important;
+  font-weight: 700;
+  border-bottom-color: var(--navy, #191970);
+}
+
+.tabCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  background: #e8e8f8;
+  color: var(--navy, #191970);
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 10px;
+}
+.tabActive .tabCount {
+  background: var(--navy, #191970);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   先生を探すタブ
+   ═══════════════════════════════════════════════════════════════ */
+
+.teacherSearchBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.providerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.providerCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #e8e8f0;
+  border-radius: 14px;
+  padding: 18px;
+  text-align: left;
+  cursor: pointer;
+  transition: box-shadow 0.18s, transform 0.12s;
+  box-shadow: 0 2px 8px rgba(25, 25, 112, 0.05);
+}
+.providerCard:hover {
+  box-shadow: 0 6px 20px rgba(25, 25, 112, 0.12);
+  transform: translateY(-2px);
+}
+
+.providerAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy, #191970) 0%, #3b2a63 100%);
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.providerCardBody {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.providerCardName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy, #191970);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.providerCardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.providerOfferingCount {
+  font-size: 0.82rem;
+  color: #555;
+}
+
+.providerMethods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.methodTag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #f0f4ff;
+  border: 1px solid #c8d8f8;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  color: var(--navy, #191970);
+  font-weight: 600;
+}

@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="子どもの「やってみたい」に、すぐ応える。airetiaは月額不要のチケット制で、好きな先生のレッスンをいつでも予約できます。" />
+  <title>airetia｜子どもの学びを、自由に。</title>
+
+  <!-- OGP -->
+  <meta property="og:title" content="airetia｜子どもの学びを、自由に。" />
+  <meta property="og:description" content="月額不要・チケット制。好きな先生のレッスンを、必要な分だけ。" />
+  <meta property="og:type" content="website" />
+
+  <style>
+    /* ── リセット ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── トークン ── */
+    :root {
+      --pink:      #ed53a3;
+      --pink-dark: #c21875;
+      --navy:      #191970;
+      --sky:       #38b6ff;
+      --purple:    #a364e2;
+      --yellow:    #FFD600;
+      --bg:        #fff8fd;
+      --card:      #ffffff;
+      --text:      #1e1e2e;
+      --muted:     #5a5a72;
+      --radius:    20px;
+      --max-w:     480px;   /* モバイル中心 */
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── コンテナ ── */
+    .wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── アニメーション ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.04); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    @keyframes gradShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════════════════════════
+       ① HERO
+    ════════════════════════════════════ */
+    #hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #fff0f8 0%, #f5f0ff 50%, #f0f8ff 100%);
+      padding: 56px 0 64px;
+      text-align: center;
+    }
+
+    /* 背景デコ */
+    #hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(237,83,163,.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(56,182,255,.10) 0%, transparent 50%),
+        radial-gradient(circle at 60% 10%, rgba(163,100,226,.08) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      padding: 5px 16px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      animation: fadeUp .6s ease-out both;
+    }
+
+    .hero-title {
+      font-size: 2.15rem;
+      font-weight: 900;
+      line-height: 1.3;
+      color: var(--navy);
+      letter-spacing: -.01em;
+      margin-bottom: 16px;
+      animation: fadeUp .65s .1s ease-out both;
+    }
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--pink-dark), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 36px;
+      animation: fadeUp .65s .2s ease-out both;
+    }
+
+    /* ヒーロー画像エリア（装飾） */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 36px;
+      animation: fadeUp .65s .25s ease-out both;
+    }
+    .hero-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 16px 14px;
+      box-shadow: 0 8px 24px rgba(25,25,112,.10);
+      border: 1.5px solid rgba(237,83,163,.2);
+      width: 120px;
+      text-align: center;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .hero-card:nth-child(2) { transform: translateY(-10px); }
+    .hero-card .icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+    .hero-card .label {
+      font-size: .68rem;
+      color: var(--muted);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .hero-cta {
+      animation: fadeUp .65s .35s ease-out both;
+    }
+
+    /* ── CTA ボタン（共通） ── */
+    .btn-cta {
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
+      background-size: 200% 200%;
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 50px;
+      box-shadow: 0 6px 24px rgba(194,24,117,.35);
+      transition: transform .2s, box-shadow .2s;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 32px rgba(194,24,117,.45);
+    }
+    .btn-cta small {
+      display: block;
+      font-size: .72rem;
+      font-weight: 500;
+      opacity: .85;
+      margin-top: 3px;
+    }
+
+    /* ══════════════════════════════
+       ② PROBLEM（こんなお悩みありませんか）
+    ══════════════════════════════ */
+    #problem {
+      padding: 64px 0;
+      background: #fff;
+    }
+
+    .section-eyebrow {
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      color: var(--pink-dark);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--navy);
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 36px;
+    }
+
+    .problem-list {
+      display: grid;
+      gap: 14px;
+    }
+    .problem-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fff5fb;
+      border: 1.5px solid rgba(237,83,163,.25);
+      border-radius: 14px;
+      padding: 18px 16px;
+    }
+    .problem-item .icon {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .problem-item p {
+      font-size: .95rem;
+      color: var(--text);
+      font-weight: 600;
+      line-height: 1.6;
+    }
+    .problem-item p span {
+      display: block;
+      font-size: .83rem;
+      color: var(--muted);
+      font-weight: 500;
+      margin-top: 3px;
+    }
+
+    /* 矢印 */
+    .arrow-down {
+      text-align: center;
+      padding: 24px 0;
+      font-size: 1.8rem;
+      color: var(--pink);
+    }
+
+    /* ══════════════════════════════
+       ③ SOLUTION
+    ══════════════════════════════ */
+    #solution {
+      padding: 64px 0;
+      background: linear-gradient(160deg, #f5f0ff 0%, #fff0f8 100%);
+      text-align: center;
+    }
+
+    .solution-logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .solution-logo span {
+      background: linear-gradient(90deg, var(--pink-dark), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .solution-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 36px;
+    }
+
+    .solution-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .pill {
+      background: #fff;
+      border: 2px solid var(--pink);
+      color: var(--navy);
+      font-size: .82rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 30px;
+    }
+
+    /* ══════════════════════════════
+       ④ FEATURES
+    ══════════════════════════════ */
+    #features {
+      padding: 64px 0;
+      background: #fff;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      border: 1.5px solid rgba(237,83,163,.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--pink), var(--purple));
+      border-radius: 4px 0 0 4px;
+    }
+    .feature-num {
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      color: var(--pink-dark);
+      margin-bottom: 8px;
+    }
+    .feature-icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
+    .feature-title {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .feature-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .feature-tag {
+      display: inline-block;
+      margin-top: 12px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* ══════════════════════════════
+       ⑤ HOW IT WORKS
+    ══════════════════════════════ */
+    #howitworks {
+      padding: 64px 0;
+      background: var(--navy);
+      color: #fff;
+    }
+    #howitworks .section-eyebrow { color: var(--pink); }
+    #howitworks .section-title   { color: #fff; }
+
+    .steps {
+      display: grid;
+      gap: 0;
+      position: relative;
+    }
+    .steps::before {
+      content: "";
+      position: absolute;
+      left: 28px;
+      top: 28px;
+      bottom: 28px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--pink) 0%, var(--purple) 100%);
+    }
+
+    .step-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px 0;
+    }
+    .step-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(237,83,163,.4);
+      position: relative;
+      z-index: 1;
+    }
+    .step-body { padding-top: 8px; }
+    .step-title {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+    .step-desc { font-size: .88rem; color: rgba(255,255,255,.65); line-height: 1.7; }
+
+    /* ══════════════════════════════
+       ⑥ TICKET（料金）
+    ══════════════════════════════ */
+    #ticket {
+      padding: 64px 0;
+      background: #fff;
+      text-align: center;
+    }
+
+    .ticket-card {
+      background: linear-gradient(135deg, #fff0f8, #f5f0ff);
+      border: 2px solid var(--pink);
+      border-radius: 24px;
+      padding: 36px 28px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ticket-card::after {
+      content: "🎫";
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      font-size: 6rem;
+      opacity: .08;
+      transform: rotate(15deg);
+    }
+
+    .ticket-price {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: var(--pink-dark);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .ticket-price sup { font-size: 1.4rem; vertical-align: top; margin-top: 10px; }
+    .ticket-price sub { font-size: .9rem; font-weight: 600; color: var(--muted); }
+
+    .ticket-label {
+      font-size: .85rem;
+      color: var(--navy);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .ticket-points {
+      display: grid;
+      gap: 10px;
+      text-align: left;
+    }
+    .ticket-point {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .9rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .ticket-point::before {
+      content: "✓";
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--pink);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .ticket-note {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: 16px;
+      line-height: 1.7;
+    }
+
+    /* ══════════════════════════════
+       ⑦ TESTIMONIALS
+    ══════════════════════════════ */
+    #testimonials {
+      padding: 64px 0;
+      background: var(--bg);
+    }
+
+    .testi-list {
+      display: grid;
+      gap: 16px;
+    }
+    .testi-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: 0 4px 20px rgba(25,25,112,.07);
+      border: 1.5px solid rgba(237,83,163,.15);
+    }
+    .testi-stars {
+      color: var(--yellow);
+      font-size: 1rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+    .testi-comment {
+      font-size: .92rem;
+      color: var(--text);
+      line-height: 1.85;
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 3px solid var(--pink);
+    }
+    .testi-author { font-size: .82rem; font-weight: 700; color: var(--muted); }
+
+    /* ══════════════════════════════
+       ⑧ FINAL CTA
+    ══════════════════════════════ */
+    #finalcta {
+      padding: 72px 0;
+      background: linear-gradient(160deg, var(--navy) 0%, #2d1b6e 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #finalcta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(237,83,163,.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(56,182,255,.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .finalcta-title {
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .finalcta-title em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--pink), #ff9de2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .finalcta-sub {
+      font-size: .92rem;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+
+    /* 信頼バッジ */
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: .78rem;
+      color: rgba(255,255,255,.85);
+      font-weight: 600;
+    }
+
+    /* ══════════════════════════════
+       ⑨ フッター（最小限）
+    ══════════════════════════════ */
+    footer {
+      background: #0d0d2b;
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .footer-links a {
+      font-size: .75rem;
+      color: rgba(255,255,255,.45);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: var(--pink); }
+    .footer-copy {
+      font-size: .7rem;
+      color: rgba(255,255,255,.25);
+    }
+
+    /* ══════════════════════════════
+       固定 CTA バー（スクロール後表示）
+    ══════════════════════════════ */
+    #sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 20px;
+      background: rgba(255,248,253,.95);
+      backdrop-filter: blur(10px);
+      border-top: 1.5px solid rgba(237,83,163,.3);
+      z-index: 100;
+      transform: translateY(100%);
+      transition: transform .35s ease;
+    }
+    #sticky-cta.show { transform: translateY(0); }
+    #sticky-cta .btn-cta {
+      padding: 15px 24px;
+      font-size: .98rem;
+      animation: none;
+    }
+
+    /* ══════════════════════════════
+       デスクトップ対応
+    ══════════════════════════════ */
+    @media (min-width: 640px) {
+      :root { --max-w: 560px; }
+      .hero-title { font-size: 2.6rem; }
+    }
+    @media (min-width: 1024px) {
+      :root { --max-w: 640px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════
+     ① HERO
+════════════════════════ -->
+<section id="hero">
+  <div class="wrap">
+    <p class="hero-badge">📣 SNS話題沸騰中</p>
+    <h1 class="hero-title">
+      子どもの「<em>やりたい</em>」に<br>すぐ応えられる、<br>新しい学びのかたち。
+    </h1>
+    <p class="hero-sub">
+      月額固定なし。チケット制だから<br>
+      必要なときに、必要な分だけ。<br>
+      審査済みの先生と、今すぐつながれる。
+    </p>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <span class="icon">🎫</span>
+        チケット制<br>
+        <span class="label">月額不要</span>
+      </div>
+      <div class="hero-card">
+        <span class="icon">✅</span>
+        審査済み<br>
+        <span class="label">安心の先生</span>
+      </div>
+      <div class="hero-card">
+        <span class="icon">📱</span>
+        オンライン<br>
+        <span class="label">対面どちらも</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="/register" class="btn-cta">
+        無料で会員登録する
+        <small>登録30秒 ・ クレジットカード不要</small>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     ② PROBLEM
+════════════════════════ -->
+<section id="problem">
+  <div class="wrap">
+    <p class="section-eyebrow">こんなお悩みありませんか？</p>
+    <h2 class="section-title">子どもの習い事、<br>こんな不満を感じていませんか</h2>
+
+    <div class="problem-list">
+      <div class="problem-item fade-up">
+        <span class="icon">😩</span>
+        <p>
+          月謝が固定で「もったいない」月がある
+          <span>休んでも月謝はそのまま…使わない分が無駄に感じる</span>
+        </p>
+      </div>
+      <div class="problem-item fade-up">
+        <span class="icon">😰</span>
+        <p>
+          先生との相性が心配で一歩踏み出せない
+          <span>入会前に試せない、雰囲気がわからない</span>
+        </p>
+      </div>
+      <div class="problem-item fade-up">
+        <span class="icon">😓</span>
+        <p>
+          「やっぱり辞めたい」が言いにくい雰囲気
+          <span>辞めるのが面倒で、ずるずる続けてしまう</span>
+        </p>
+      </div>
+      <div class="problem-item fade-up">
+        <span class="icon">🤔</span>
+        <p>
+          子どもの興味は変わるのに、対応できない
+          <span>先生・内容を変えたいが、探すのが大変</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="arrow-down">↓</div>
+
+<!-- ════════════════════════
+     ③ SOLUTION
+════════════════════════ -->
+<section id="solution">
+  <div class="wrap">
+    <p class="section-eyebrow">Solution</p>
+    <div class="solution-logo fade-up"><span>airetia</span>が解決します</div>
+    <p class="solution-desc fade-up">
+      airetiaは「チケット制」の予約プラットフォーム。<br>
+      月額を気にせず、子どもの気持ちに合わせて<br>
+      いつでも・好きな先生のレッスンを予約できます。
+    </p>
+
+    <div class="solution-pills fade-up">
+      <span class="pill">月額不要</span>
+      <span class="pill">チケット制</span>
+      <span class="pill">全員審査済み</span>
+      <span class="pill">オンライン対応</span>
+      <span class="pill">すぐキャンセルOK</span>
+      <span class="pill">兄弟まとめて管理</span>
+    </div>
+
+    <a href="/register" class="btn-cta fade-up">
+      無料で会員登録する
+      <small>登録30秒 ・ クレジットカード不要</small>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     ④ FEATURES
+════════════════════════ -->
+<section id="features">
+  <div class="wrap">
+    <p class="section-eyebrow">Features</p>
+    <h2 class="section-title">airetiaが選ばれる<br>3つの理由</h2>
+
+    <div class="feature-list">
+      <div class="feature-card fade-up">
+        <p class="feature-num">POINT 01</p>
+        <span class="feature-icon">🎫</span>
+        <h3 class="feature-title">月額不要のチケット制</h3>
+        <p class="feature-desc">
+          チケット1枚500円（税抜）。使いたい分だけ購入するから、
+          「休んだのに月謝が…」というストレスがゼロ。
+          子どもの気持ちやスケジュールに合わせて柔軟に使えます。
+        </p>
+        <span class="feature-tag">有効期限1年間</span>
+      </div>
+
+      <div class="feature-card fade-up">
+        <p class="feature-num">POINT 02</p>
+        <span class="feature-icon">🛡️</span>
+        <h3 class="feature-title">全員審査済みの安心先生</h3>
+        <p class="feature-desc">
+          すべての先生は身分証・契約書・口座情報の提出と
+          管理者審査を通過した方のみ。
+          子どもを任せられる安全な環境を徹底しています。
+        </p>
+        <span class="feature-tag">書類審査完了済み</span>
+      </div>
+
+      <div class="feature-card fade-up">
+        <p class="feature-num">POINT 03</p>
+        <span class="feature-icon">👨‍👩‍👧</span>
+        <h3 class="feature-title">兄弟・家族をまとめて管理</h3>
+        <p class="feature-desc">
+          1つのアカウントで複数のお子様を登録・管理できます。
+          チケットも共有できるから、家族全員でお得に活用可能。
+        </p>
+        <span class="feature-tag">最大5名まで登録</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     ⑤ HOW IT WORKS
+════════════════════════ -->
+<section id="howitworks">
+  <div class="wrap">
+    <p class="section-eyebrow">How it Works</p>
+    <h2 class="section-title">使い方はかんたん<br>4ステップ</h2>
+
+    <div class="steps">
+      <div class="step-item fade-up">
+        <div class="step-circle">1</div>
+        <div class="step-body">
+          <h3 class="step-title">無料会員登録（30秒）</h3>
+          <p class="step-desc">メールアドレスとパスワードだけ。クレジットカードは不要です。</p>
+        </div>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-circle">2</div>
+        <div class="step-body">
+          <h3 class="step-title">お子様を登録</h3>
+          <p class="step-desc">名前・年齢などを入力してお子様のプロフィールを作成します。兄弟もまとめて登録できます。</p>
+        </div>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-circle">3</div>
+        <div class="step-body">
+          <h3 class="step-title">チケットを購入</h3>
+          <p class="step-desc">振込確認後にチケットが付与されます。まずは少枚数から試すのがおすすめです。</p>
+        </div>
+      </div>
+      <div class="step-item fade-up">
+        <div class="step-circle">4</div>
+        <div class="step-body">
+          <h3 class="step-title">レッスンを予約・受講</h3>
+          <p class="step-desc">好きな先生・日時を選んで予約するだけ。チケットが自動で消費されます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     ⑥ TICKET
+════════════════════════ -->
+<section id="ticket">
+  <div class="wrap">
+    <p class="section-eyebrow">Pricing</p>
+    <h2 class="section-title">シンプルな料金体系</h2>
+
+    <div class="ticket-card fade-up">
+      <p class="ticket-label">チケット 1枚あたり</p>
+      <p class="ticket-price"><sup>¥</sup>500<sub>（税抜）</sub></p>
+
+      <div class="ticket-points">
+        <div class="ticket-point">1枚単位で購入OK。まとめ買いも可</div>
+        <div class="ticket-point">有効期限は購入日から1年間</div>
+        <div class="ticket-point">24時間前のキャンセルで100%返還</div>
+        <div class="ticket-point">余ったチケットは次のレッスンに使える</div>
+      </div>
+    </div>
+
+    <p class="ticket-note">
+      ※ 現在は銀行振込にて購入受付中。オンライン決済は近日対応予定です。<br>
+      ※ 1回のレッスンで必要なチケット枚数は内容・時間によって異なります。
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     ⑦ TESTIMONIALS
+════════════════════════ -->
+<section id="testimonials">
+  <div class="wrap">
+    <p class="section-eyebrow">Voice</p>
+    <h2 class="section-title">ご利用者様の声</h2>
+
+    <div class="testi-list">
+      <div class="testi-card fade-up">
+        <p class="testi-stars">★★★★★</p>
+        <p class="testi-comment">
+          「月謝制ではないので、旅行や体調不良の月も
+          無駄なく使えます。子どもが楽しみにしているので
+          続けやすいです！」
+        </p>
+        <p class="testi-author">T.M さん ／ 小学3年生の保護者</p>
+      </div>
+      <div class="testi-card fade-up">
+        <p class="testi-stars">★★★★★</p>
+        <p class="testi-comment">
+          「先生の審査がしっかりしているので安心して
+          子どもを任せられます。オンラインでも先生との
+          距離が近くてびっくりしました。」
+        </p>
+        <p class="testi-author">Y.H さん ／ 小学6年生の保護者</p>
+      </div>
+      <div class="testi-card fade-up">
+        <p class="testi-stars">★★★★☆</p>
+        <p class="testi-comment">
+          「2人の子どもを1つのアカウントで管理できるのが
+          本当に便利。予約もキャンセルもアプリから
+          サクッとできます。」
+        </p>
+        <p class="testi-author">R.F さん ／ 2児の保護者</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     ⑧ FINAL CTA
+════════════════════════ -->
+<section id="finalcta">
+  <div class="wrap">
+    <h2 class="finalcta-title fade-up">
+      今日から、子どもの<br>
+      「<em>やりたい</em>」を叶えよう。
+    </h2>
+    <p class="finalcta-sub fade-up">
+      登録無料・30秒で完了<br>
+      クレジットカード登録不要
+    </p>
+
+    <div class="trust-badges fade-up">
+      <span class="badge">🔒 SSL暗号化通信</span>
+      <span class="badge">✅ 全員審査済み</span>
+      <span class="badge">🎫 月額不要</span>
+    </div>
+
+    <a href="/register" class="btn-cta fade-up">
+      無料で会員登録する
+      <small>登録30秒 ・ クレジットカード不要</small>
+    </a>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     フッター
+════════════════════════ -->
+<footer>
+  <div class="footer-links">
+    <a href="/privacy">プライバシーポリシー</a>
+    <a href="/termsOfService">利用規約</a>
+    <a href="/legal-notice">特定商取引法</a>
+    <a href="/contact">お問い合わせ</a>
+    <a href="/">公式サイトへ</a>
+  </div>
+  <p class="footer-copy">© 2026 airetia. All rights reserved.</p>
+</footer>
+
+<!-- ════════════════════════
+     固定CTAバー
+════════════════════════ -->
+<div id="sticky-cta">
+  <a href="/register" class="btn-cta">
+    無料で会員登録する
+    <small>登録30秒 ・ クレジットカード不要</small>
+  </a>
+</div>
+
+<script>
+  // ── スクロールアニメーション ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── 固定CTAバー（ヒーロー通過後に表示）──
+  const stickyCta = document.getElementById('sticky-cta');
+  const heroSection = document.getElementById('hero');
+
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      stickyCta.classList.toggle('show', !e.isIntersecting);
+    });
+  }, { threshold: 0 });
+
+  heroObserver.observe(heroSection);
+</script>
+</body>
+</html>

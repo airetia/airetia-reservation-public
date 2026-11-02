@@ -1,0 +1,282 @@
+/* frontend/src/pages/member/ProviderApplicationPage.module.css */
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+.field label, .label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+.field input,
+.field select,
+.field textarea,
+.input {
+  width: 100%;
+  padding: .5rem .75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  background: var(--color-bg);
+  box-sizing: border-box;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px color-mix(in srgb,#3b82f6 15%,transparent);
+}
+.fieldError, .errorMsg {
+  font-size: var(--font-size-xs);
+  color: var(--color-danger);
+  margin-top: 2px;
+}
+.required { color: var(--color-danger); margin-left: 2px; }
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-xl);
+}
+/* ステップウィザード */
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-xl);
+}
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.stepNum {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  background: var(--color-bg-muted);
+  color: var(--color-text-muted);
+  border: 2px solid var(--color-border);
+  flex-shrink: 0;
+}
+.active .stepNum {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+.done .stepNum {
+  background: #10b981;
+  color: #fff;
+  border-color: #10b981;
+}
+.stepDesc {
+  display: none;
+}
+@media (min-width: 640px) {
+  .stepDesc { display: inline; }
+}
+/* ステップ区切り */
+.stepItem + .stepItem::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--color-border);
+  margin-right: var(--spacing-xs);
+}
+/* フォーム */
+.form {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-sm);
+}
+.appealText {
+  width: 100%;
+  min-height: 120px;
+  padding: .5rem .75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  resize: vertical;
+  box-sizing: border-box;
+}
+.appealText:focus { outline: none; border-color: #3b82f6; }
+.counter {
+  text-align: right;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+/* リスト項目 */
+.listRow {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  margin-bottom: var(--spacing-xs);
+}
+.listRow input {
+  flex: 1;
+}
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  padding: .375rem .875rem;
+  background: var(--color-bg-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  color: var(--color-text);
+  transition: background var(--transition-fast);
+}
+.addBtn:hover { background: var(--color-border); }
+.removeBtn {
+  padding: .25rem .5rem;
+  background: none;
+  border: none;
+  color: var(--color-danger);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  flex-shrink: 0;
+}
+/* ファイルアップロード */
+.filename {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--spacing-xs);
+}
+/* 確認画面 */
+.confirm {
+  background: var(--color-bg-subtle);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+.confirmList dt {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: var(--spacing-xs);
+  margin-top: var(--spacing-md);
+}
+.confirmList dd {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  margin: 0;
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+/* ボタン行 */
+.btnRow {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: space-between;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+.backBtn {
+  padding: .5rem 1.25rem;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  transition: background var(--transition-fast);
+}
+.backBtn:hover { background: var(--color-bg-muted); }
+.nextBtn {
+  padding: .5rem 1.5rem;
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.nextBtn:hover:not(:disabled) { background: var(--color-primary-dark); }
+.nextBtn:disabled { opacity: .55; cursor: not-allowed; }
+/* 完了画面 */
+.complete {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+.completeIcon { font-size: 3rem; margin-bottom: var(--spacing-md); }
+
+/* ステップ状態クラス（.stepItem と組み合わせて使用） */
+.active .stepNum {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+.done .stepNum {
+  background: #10b981;
+  color: #fff;
+  border-color: #10b981;
+}
+
+/* 確認リスト定義リスト */
+.confirmList {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--spacing-xs) var(--spacing-lg);
+}
+.confirmList dt {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding-top: 2px;
+  white-space: nowrap;
+}
+.confirmList dd {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  margin: 0;
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* stepItem のステート（JSXで直接付与） */
+.active { color: var(--color-text); }
+.done   { color: var(--color-success); }
