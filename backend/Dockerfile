@@ -7,4 +7,4 @@ RUN mvn -q -B -DskipTests package
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-XX:MaxRAMPercentage=70", "-XX:+UseSerialGC", "-jar", "app.jar"]

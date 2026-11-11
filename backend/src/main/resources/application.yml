@@ -90,6 +90,7 @@ airetia:
   security:
     # カンマ区切りで環境変数 ALLOWED_ORIGINS により上書き（公開環境のURLはここに書かない）
     allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000}
+    csrf-cookie-domain: ${CSRF_COOKIE_DOMAIN:}
   cors:
     max-age: 3600
 

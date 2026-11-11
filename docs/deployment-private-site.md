@@ -16,6 +16,7 @@
 |---|---|
 | `DB_URL` / `DB_USERNAME` / `DB_PASSWORD` | 無料DBの接続情報 |
 | `ALLOWED_ORIGINS` | 画面のURL（カンマ区切り） |
+| `CSRF_COOKIE_DOMAIN` | 親ドメイン（画面とAPIが別サブドメインのため必須。画面がXSRF-TOKEN Cookieを読めるようにする） |
 | `SESSION_COOKIE_SECURE` | 公開環境は `true` |
 | `SESSION_COOKIE_SAMESITE` | `lax`（同一サイト構成の場合） |
 | `LOG_LEVEL_APP` / `LOG_LEVEL_FRAMEWORK` | 公開環境は `INFO` |

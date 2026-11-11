@@ -50,6 +50,10 @@ public class SecurityConfig {
     @Value("${airetia.security.allowed-origins}")
     private String[] allowedOrigins;
 
+    /** XSRF-TOKEN Cookie の Domain。画面とAPIが別サブドメインのとき親ドメインを指定（空なら指定しない） */
+    @Value("${airetia.security.csrf-cookie-domain:}")
+    private String csrfCookieDomain;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -61,7 +65,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
             .csrf(csrf -> csrf
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .csrfTokenRepository(csrfTokenRepository())
                 .csrfTokenRequestHandler(requestHandler)
                 .ignoringRequestMatchers(
                     "/api/v1/auth/login",
@@ -164,5 +168,13 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/api/**", config);
         return source;
+    }
+
+    private CookieCsrfTokenRepository csrfTokenRepository() {
+        CookieCsrfTokenRepository repository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        if (!csrfCookieDomain.isBlank()) {
+            repository.setCookieCustomizer(cookie -> cookie.domain(csrfCookieDomain));
+        }
+        return repository;
     }
 }
