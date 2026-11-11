@@ -4,9 +4,9 @@ spring:
     name: airetia-backend
 
   datasource:
-    url: jdbc:mysql://localhost:3306/airetia?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: root
-    password: ""
+    url: ${DB_URL:jdbc:mysql://localhost:3306/airetia?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 10
@@ -63,7 +63,7 @@ spring:
 # ─────────────────────────────────────────────────
 
 server:
-  port: 8080
+  port: ${PORT:8080}
   servlet:
     context-path: /
     session:
@@ -71,26 +71,25 @@ server:
       cookie:
         name: airetia_SESSION
         http-only: true
-        secure: false
-        same-site: lax
+        secure: ${SESSION_COOKIE_SECURE:false}
+        same-site: ${SESSION_COOKIE_SAMESITE:lax}
         max-age: 28800
 
 logging:
   level:
     root: INFO
-    com.airetia: DEBUG
-    org.springframework.security: DEBUG
-    org.springframework.web: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.airetia: ${LOG_LEVEL_APP:DEBUG}
+    org.springframework.security: ${LOG_LEVEL_FRAMEWORK:DEBUG}
+    org.springframework.web: ${LOG_LEVEL_FRAMEWORK:DEBUG}
+    org.hibernate.SQL: ${LOG_LEVEL_FRAMEWORK:DEBUG}
+    org.hibernate.type.descriptor.sql.BasicBinder: ${LOG_LEVEL_SQL_PARAMS:TRACE}
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
 airetia:
   security:
-    allowed-origins:
-      - http://localhost:5173
-      - http://localhost:3000
+    # カンマ区切りで環境変数 ALLOWED_ORIGINS により上書き（公開環境のURLはここに書かない）
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000}
   cors:
     max-age: 3600
 
