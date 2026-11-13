@@ -275,6 +275,6 @@ POST {{baseUrl}}/api/{{apiVersion}}/auth/logout
 # Content-Type: application/json
 # 
 # {
-#   "email": "admin@airetia.com",
+#   "email": "admin@example.com",
 #   "password": "AdminPassword123!"
 # }

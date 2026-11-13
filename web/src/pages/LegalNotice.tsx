@@ -13,7 +13,7 @@ const legalData: LegalRow[] = [
   { label: "所在地",         value: "(住所を入力)" },
   { label: "電話番号",       value: "(電話番号を入力)（お問い合わせはメールにて承ります）" },
   { label: "メールアドレス", value: "(メールアドレスを入力)" },
-  { label: "サービスURL",    value: "https://airetia.com" },
+  { label: "サービスURL",    value: "(サービスURLを入力)" },
   {
     label: "販売価格",
     value: [

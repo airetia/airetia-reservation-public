@@ -43,8 +43,8 @@ RDS MySQL
 | S3（Static） | 標準ストレージ | フロントエンド静的ファイル |
 | S3（Documents） | 標準ストレージ | プロバイダー書類（非公開・IAM 制御） |
 | ALB | application | HTTPS 終端 |
-| ACM | ワイルドカード証明書 | *.airetia.com |
-| Route53 | A/CNAME | airetia.com, api.airetia.com |
+| ACM | ワイルドカード証明書 | *.<本番ドメイン> |
+| Route53 | A/CNAME | <本番ドメイン>, api.<本番ドメイン> |
 
 ### Phase2 以降の追加リソース
 
@@ -299,8 +299,8 @@ src/main/resources/db/migration/
 | 環境 | URL | 用途 |
 |-----|-----|------|
 | ローカル | http://localhost:5173 (FE) / http://localhost:8080 (BE) | 開発 |
-| ステージング | https://staging.airetia.com | 動作確認・レビュー |
-| 本番 | https://airetia.com | 運用 |
+| ステージング | https://staging.<本番ドメイン> | 動作確認・レビュー |
+| 本番 | https://<本番ドメイン> | 運用 |
 
 ### 3.2 環境変数
 
@@ -383,10 +383,10 @@ aws:
 VITE_API_BASE_URL=http://localhost:8080/api/v1
 
 # .env.staging
-VITE_API_BASE_URL=https://api.staging.airetia.com/api/v1
+VITE_API_BASE_URL=https://api.staging.<本番ドメイン>/api/v1
 
 # .env.production
-VITE_API_BASE_URL=https://api.airetia.com/api/v1
+VITE_API_BASE_URL=https://api.<本番ドメイン>/api/v1
 ```
 
 ---

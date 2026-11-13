@@ -39,9 +39,9 @@ import lombok.extern.slf4j.Slf4j;
  * ┌──────────────────────────┬────────────────┬──────────────────────────────────┐
  * │ メールアドレス            │ パスワード     │ ロール                           │
  * ├──────────────────────────┼────────────────┼──────────────────────────────────┤
- * │ admin@airetia.com        │ Admin1234!@    │ ADMIN                            │
- * │ member@airetia.com       │ Member1234!    │ MEMBER（チケット10枚）           │
- * │ provider@airetia.com     │ Provider1234!  │ MEMBER + APPROVED プロバイダー   │
+ * │ admin@example.com        │ Admin1234!@    │ ADMIN                            │
+ * │ member@example.com       │ Member1234!    │ MEMBER（チケット10枚）           │
+ * │ provider@example.com     │ Provider1234!  │ MEMBER + APPROVED プロバイダー   │
  * └──────────────────────────┴────────────────┴──────────────────────────────────┘
  */
 @Slf4j
@@ -69,7 +69,7 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private void createAdminIfAbsent() {
-        final String email = "admin@airetia.com";
+        final String email = "admin@example.com";
         if (memberRepository.existsByEmail(email)) return;
         memberRepository.save(Member.builder()
             .email(email)
@@ -83,7 +83,7 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private void createMemberIfAbsent() {
-        final String email = "member@airetia.com";
+        final String email = "member@example.com";
         if (memberRepository.existsByEmail(email)) return;
 
         Member member = memberRepository.save(Member.builder()
@@ -106,7 +106,7 @@ public class DataInitializer implements ApplicationRunner {
     }
 
     private void createProviderIfAbsent() {
-        final String email = "provider@airetia.com";
+        final String email = "provider@example.com";
         if (memberRepository.existsByEmail(email)) return;
 
         Member member = memberRepository.save(Member.builder()

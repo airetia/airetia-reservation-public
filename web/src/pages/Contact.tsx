@@ -55,7 +55,7 @@ const Contact = () => {
             <label className="form-label">
               メールアドレス <span className="form-required">*</span>
             </label>
-            <input type="email" name="email" value={form.email} onChange={handleChange} className="form-control" required placeholder="example@airetia.com" />
+            <input type="email" name="email" value={form.email} onChange={handleChange} className="form-control" required placeholder="example@example.com" />
           </div>
 
           <div className="form-group">

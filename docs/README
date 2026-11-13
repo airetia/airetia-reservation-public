@@ -302,7 +302,7 @@ npm run dev
 ./scripts/setup/setup-admin.sh
 
 # または手動で環境変数設定後、アプリ起動
-export ADMIN_INITIAL_EMAIL=admin@airetia.com
+export ADMIN_INITIAL_EMAIL=admin@example.com
 export ADMIN_INITIAL_PASSWORD=<強力なパスワード>
 mvn spring-boot:run
 ```
@@ -421,8 +421,8 @@ main         # 本番環境（Phase 1完了後）
 3. プロジェクト内のコメント
 
 **連絡先:**
-- 開発チーム: dev@airetia.com
-- 管理者: admin@airetia.com
+- 開発チーム: dev@<サービスドメイン>
+- 管理者: admin@<サービスドメイン>
 
 ---
 

@@ -9,7 +9,7 @@
 --   (BCrypt strength=12 でハッシュ済み)
 --
 -- 【アカウント一覧】
---   admin@airetia.com        ← 管理者
+--   admin@example.com        ← 管理者
 --   member@example.com       ← 一般メンバー（SELF Participant あり）
 --   parent@example.com       ← 保護者メンバー（CHILD Participant x2）
 --   provider@example.com     ← APPROVED プロバイダー兼メンバー
@@ -63,7 +63,7 @@ INSERT INTO members (id, email, password_hash, role,
                      is_active, is_locked, suspended_until) VALUES
 
 -- 管理者
-(1, 'admin@airetia.com',
+(1, 'admin@example.com',
     '$2a$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
     'ADMIN',
     '管理', '太郎', 'かんり', 'たろう',

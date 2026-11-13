@@ -158,4 +158,4 @@ Cookie の利用については [04_cookie_policy.md](./04_cookie_policy.md) を
 | 事業者名 | [運営会社名] |
 | 個人情報保護管理者 | [氏名・役職] |
 | 住所 | [住所] |
-| メール | privacy@airetia.com |
+| メール | privacy@<サービスドメイン> |
