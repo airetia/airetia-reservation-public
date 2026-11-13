@@ -380,13 +380,13 @@ aws:
 
 ```bash
 # .env.development
-VITE_API_BASE_URL=http://localhost:8080/api/v1
+VITE_API_BASE_URL=http://localhost:8080
 
 # .env.staging
-VITE_API_BASE_URL=https://api.staging.<本番ドメイン>/api/v1
+VITE_API_BASE_URL=https://api.staging.<本番ドメイン>
 
 # .env.production
-VITE_API_BASE_URL=https://api.<本番ドメイン>/api/v1
+VITE_API_BASE_URL=https://api.<本番ドメイン>
 ```
 
 ---

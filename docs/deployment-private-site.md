@@ -24,7 +24,7 @@
 
 ## GitHub側の操作
 1. Settings → Pages → Build and deployment を「GitHub Actions」にする。
-2. Settings → Secrets and variables → Actions → Variables に `VITE_API_BASE_URL`（APIのURL）を登録する。
+2. Settings → Secrets and variables → Actions → Variables に `VITE_API_BASE_URL`（APIのホストまで。例 `https://<API用サブドメイン>.<ドメイン>`。`/api/v1` は画面側のコードが付けるので書かない）を登録する。
 3. Pages の Custom domain に画面用ドメインを設定する（リポジトリに `CNAME` ファイルは置かない）。
 4. DNS反映後、Enforce HTTPS を有効にする。
 
